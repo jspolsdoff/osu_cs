@@ -15,6 +15,8 @@ int main()
 {
 	std::cout << "Hello World!!!\n";
 
+	std:: cout << "This is a GitHub commit test!" << endl;
+
 	return 0;
 
 }
