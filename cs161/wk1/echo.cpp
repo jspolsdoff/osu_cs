@@ -24,6 +24,8 @@ int main()
 
 	cout << "Thanks for playing!" << endl;
 
+	cout << "Testing another update to GitHub" << endl;
+
 	return 0;
 
 }
