@@ -80,7 +80,9 @@ int main()
 	LineSegment line1(point1, point2);	// declare object for LineSegment
 	double x,				// declare variable for 'x' coordinate
 	       y;				// declare variable for 'y' coordinate
+	char again;				// variable for do/while loop to run program again
 	
+	do {
 	// wrap program in do/while loop to allow user to repeat	
 	// ask user for first point coordinate
 	cout << "Please enter the coordinates for two points below." << endl;
@@ -117,6 +119,12 @@ int main()
 
 	// display the 'line' objects length and slope
 	cout << "\nThe slope of the LineSegment is " << line1.getSlope() << endl;
+
+	// ask if the user would like to run program again
+	cout << "Would you like to run the program again? Enter 'Y' or 'N': ";
+	cin >> again;  
+
+	} while (toupper(again) == 'Y');
 
 	return 0;
 }  
