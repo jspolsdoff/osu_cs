@@ -37,9 +37,9 @@ class Item
 	public:
 	Item();						// default constructor
 	void setItem();					// builds the object with user input
-	// string getName();
+	string getName();				// function for getter to display the name in the object
 	double getPrice();				// function for getter to display the price in the object
-	// int getQuantity();
+	int getQuantity();				// funtion for the getter to display the quantity in the object
 
 };
 
@@ -99,7 +99,7 @@ int main()
 				break;
 			// call 'total price' function if user selects 3
 			case 3: cout << "This is option 3" << endl;
-				// TotalPrice(cart_item_num, shoppingCart);
+				shoppingCart.totalPrice();
 				break;
 			// quit program if user selects 4
 			case 4: cout << "This is option 4" << endl;
@@ -124,7 +124,7 @@ int main()
 	price = quantity = 0;
  }
 
-  /***************************************************************************************************
+ /***************************************************************************************************
  *					setItem
  *This fuction will ask the user to will out the 'item' struct and add it to the shoppingCart array	
  *				
@@ -160,17 +160,35 @@ void Item::setItem()
 }
 
 /**************************************************************************************************
+ *					getName
+ *This is a getter emember function for the Item class to display the price variable
+ **************************************************************************************************/
+string Item::getName()
+{
+	return name;
+} 
+
+/**************************************************************************************************
  * 					getPrice
- *
+ *This is a getter member function for the Item class to display the price variable
  **************************************************************************************************/
 double Item::getPrice()
 {
 	return price;
 } 					
+
+/**************************************************************************************************
+ *					getQuantity
+ *This is a getter member function for the Item class to display the quantity variable 
+ **************************************************************************************************/ 
+int Item::getQuantity()
+{
+	return quantity;
+}
  
- // ShoppingCart class member function implementation section
+// ShoppingCart class member function implementation section
   
- /**************************************************************************************************
+/**************************************************************************************************
  *					addItem
  *This function will add an item to the ShoppingCart object. 
  **************************************************************************************************/
@@ -193,9 +211,9 @@ void ShoppingCart::listContents()
 	for (int i = 0; i < length; i++)
 	{
 		// display information about contents of cart
-		// cout << "Name: " << contents[i].name << endl; 
+		cout << "Name: " << contents[i].getName() << endl; 
 		cout << "Price: $" << fixed << setprecision(2) << contents[i].getPrice() << endl;
-		// cout << "Quantity: " << contents[i].quantity << endl;
+		cout << "Quantity: " << contents[i].getQuantity() << endl;
 	
 		cout << endl;
 	}
@@ -213,7 +231,7 @@ void ShoppingCart::totalPrice()
 	
 	for (int i = 0; i < length; i++)
 	{
-		// total_price += contents[i].price * contents[i].quantity;
+		total_price += contents[i].getPrice() * contents[i].getQuantity();
 	}
 	
 	cout << "Total cost of items in shopping cart: $" << fixed << setprecision(2) << total_price << "\n" << endl;
