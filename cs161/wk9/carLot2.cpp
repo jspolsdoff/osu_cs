@@ -1,7 +1,7 @@
 /****************************************************************************
 *Author:                           James Spolsdoff
 *Dated Created:                    11/27/14
-*Last Modified Date:               11/28/14
+*Last Modified Date:               11/29/14
 *Filename:                         carLot2.cpp
 *
 *Overview:
@@ -20,6 +20,7 @@
 #include <vector>
 #include <stdlib.h>
 #include <iomanip>
+#include <math.h>
 using namespace std;
 
 // create a class called Date
@@ -32,10 +33,10 @@ class Date
 	
 	public:
 	Date();					// default constructor for Date class
-	Date(int, int, int);	// constructor that takes all variables as parameters
-	getMonth();				// getter function to display the month variable
-	getDay();				// getter function to display the day variable
-	getYear();				// getter function to display the year variable
+	Date(int, int, int);			// constructor that takes all variables as parameters
+	int getMonth();				// getter function to display the month variable
+	int getDay();				// getter function to display the day variable
+	int getYear();				// getter function to display the year variable
 };
 
 // create a class called Car
@@ -45,10 +46,10 @@ class Car
 	string make;
 	string model;
 	int year;
-	Date datePurchased;
+	// Date datePurchased;
 	double purchasePrice;
 	bool isSold;
-	Date dateSold;
+	// Date dateSold;
 	double salePrice;
 
 	public:
@@ -56,46 +57,60 @@ class Car
 	Car();
 	Car(string, string, int, Date, double, bool, Date, double);
 	Car(string, string, int, Date, double, bool);
+
+	Date datePurchased;
+	Date dateSold;
 	
-	getMake();				// display the make variable
-	getModel();				// display the model variable
-	getYear();				// display the year variable
-	get purchasePrice();	// display the purchase price variable
-	get isSold()			// display if variable is true/false
-	get salePrice();		// display the salePrice variable
-	getProfit();
+	string getMake();		// display the make variable
+	string getModel();		// display the model variable
+	int getYear();			// display the year variable
+	double getPurchasePrice();	// display the purchase price variable
+	bool getIsSold();		// display if variable is true/false
+	double getSalePrice();		// display the salePrice variable
+	double getProfit();		// displays the profit if the car has been sold
 };
 
 // create a class called CarLot
 class CarLot
 {
 	private:
-	vector<Car> inventory
+	vector<Car> inventory;
 	
 	public:
-	addCar();				// takes the Car class as a parameter and adds to the 'inventory' vector
-	listCurrentInv();		// prints out a list of current Car inventory that hasn't been sold yet
-	getMonthProfit();		// returns the total profit for sales in a given month and year
+	void addCar(Car);			// takes the Car class as a parameter and adds to the 'inventory' vector
+	void listCurrentInv();			// prints out a list of current Car inventory that hasn't been sold yet
+	double getMonthProfit(int, int);	// returns the total profit for sales in a given month and year
 };
 
 int main()
 {
 	CarLot carLot;			// variable for carLot object
+	Car newCar;
+	Date dateSold;
+	Date datePurchased;
 	int menu_choice = 0;	// variable for menu selection
 	
 	// variable for Day arguments				
-	int day,	
-	month,	
-	year;
+	int purchase_day = 0,	
+	purchase_month = 0,	
+	purchase_year = 0;
+
+	int sold_day = 0,
+	sold_month = 0,
+	sold_year = 0;
 	
 	// variable for Car arguments
 	string make,
 	model;
-	int year;
+	int model_year;
 	double purchase_price;
 	char sold;
 	bool is_sold;
 	double sale_price;
+
+	// variables to pass for profit calculation
+	int profit_month,
+	profit_year; 
 				   
 
 	cout << "WELCOME TO THE CAR LOT\n" << endl;
@@ -123,7 +138,9 @@ int main()
 		switch (menu_choice)
 		{		
 			// take all of user input information and create Date and Car
-			case 1: cout << "This is option 1\n" << endl;
+			case 1: 
+			{
+				cout << "This is option 1\n" << endl;
 				
 				// ask for the make of car
 				cout << "What is the make of the car: ";
@@ -135,24 +152,24 @@ int main()
 				
 				// ask for model year
 				cout << "What is the model year of the car: ";
-				cint >> year;
+				cin >> model_year;
 				
 				// ask for date purchased
 				cout << "When was the car purchased?" << endl;
 					// month
 					cout << "Month: ";
-					cin >> month;
+					cin >> purchase_month;
 					
 					// day
 					cout << "Day: ";
-					cin >> day;
+					cin >> purchase_day;
 					
 					// year
 					cout << "Year: ";
-					cin >> year;
+					cin >> purchase_year;
 					
 					// create datePurchased object
-					Date datePurchased(month, day, year);
+					Date datePurchased(purchase_month, purchase_day, purchase_year);
 					
 				// ask for purchase price
 				cout << "What was the purchase price of the car: ";
@@ -174,50 +191,70 @@ int main()
 					cout << "When was the car sold?" << endl;
 					
 					cout << "Month: ";
-					cin >> month;
+					cin >> sold_month;
 					
 					cout << "Day: ";
-					cin >> day;
+					cin >> sold_day;
 					
 					cout << "Year: ";
-					cin >> year;
+					cin >> sold_year;
 					
 					// create the dateSold object
-					Date dateSold(month, day, year);
+					Date dateSold(sold_month, sold_day, sold_year);
 					
 					// create Car object
-					Car car(make, model, year, datePurchased, purchase_price, is_sold, dateSold, sale_price);
+					Car newCar(make, model, model_year, datePurchased, purchase_price, is_sold, dateSold, sale_price);
 					
+					// pass car object into carLot object and store in vector
+					carLot.addCar(newCar);
 				}
 				
 				else
 				{
-					is_ sold = false;
+					is_sold = false;
 					
 					// create Car object
-					Car car(make, model, year, datePurchased, purchase_price, is_sold);
+					Car newCar(make, model, model_year, datePurchased, purchase_price, is_sold);
 					
+					carLot.addCar(newCar);
+
 				}
-				
-				// pass car object into carLot object and store in vector
-				carLot.addCar(car);
-				
+												
 				break;		
-			
+			}
 			// call 'list current inventory' function if user selects 2
-			case 2: cout << "This is option 2" << endl;	
+			case 2: 
+			{	
+				cout << "This is option 2" << endl;	
 				// call function to list current inventory
-				carLot.inventory.listCurrentInv();
+				carLot.listCurrentInv();
 				break;
+			}
 			// call 'profit for a month' function if user selects 3
-			case 3: cout << "This is option 3" << endl;
-				// call function to calculate profit for a given month
-					
+			case 3: 
+			{	
+				cout << "This is option 3" << endl;
+				//  calculate profit for a given month and year
+				cout << "What date do you want to calculate profits for?" << endl;
+				cout << "Month: ";
+				cin >> profit_month;
+
+				cout << "Year: ";
+				cin >> profit_year;  
+
+				cout << endl;
+	
+				cout << "The profit for " << profit_month << "/" << profit_year << " is: $ " << fixed << setprecision(2) << carLot.getMonthProfit(profit_month, profit_year) << endl;
+
 				break;
+			}
 			// quit program if user selects 4
-			case 4: cout << "This is option 4" << endl;
+			case 4: 
+			{
+				cout << "This is option 4" << endl;
 				exit(EXIT_SUCCESS);
 				break;
+			}
 		}
 		
 	} while(menu_choice != 4);		 
@@ -317,11 +354,25 @@ int Date::getYear()
 
 // Car class member function implementation section
 
+/**************************************************************************************************
+ *						Car
+ *This is the deffault constructor for the Car class.
+ **************************************************************************************************/ 
+Car::Car()
+{
+	make = " ";
+	model = " ";
+	year = 0;
+	Date datePurchased;
+	purchasePrice = 0;
+	isSold = false;
+}
+
  /**************************************************************************************************
  *						Car
  *This is the constructor for the Car class. It builds a Car object default values.
  **************************************************************************************************/
-  Car::Car(string user_input_make, string user_input_model, int user_input_year, Date ui_datePurchased, double ui_purchasePrice, bool user_input_isSold, Date user_input_dateSold, double user_input_salePrice)
+Car::Car(string user_input_make, string user_input_model, int user_input_year, Date ui_datePurchased, double ui_purchasePrice, bool user_input_isSold, Date user_input_dateSold, double user_input_salePrice)
  {
 	make = user_input_make;
 	model = user_input_model;
@@ -338,7 +389,7 @@ int Date::getYear()
  *						Car
  *This is the constructor for the Car class. It builds a Car object default values.
  **************************************************************************************************/
- Car::Car(string user_input_make, string user_input_model, int user_input_year, Date ui_datePurchased, double user_input_purchasePrice, bool user_input_isSold)
+Car::Car(string user_input_make, string user_input_model, int user_input_year, Date ui_datePurchased, double ui_purchasePrice, bool user_input_isSold)
  {
 	make = user_input_make;
 	model = user_input_model;
@@ -352,14 +403,14 @@ int Date::getYear()
  *						getMake
  *This is a getter member function for the Car class to display the make variable
  **************************************************************************************************/
-string Car::getName()
+string Car::getMake()
 {
 	return make;
 }
 
 /**************************************************************************************************
  *						getModel
- *This is a getter emember function for the Car class to display the model variable
+ *This is a getter member function for the Car class to display the model variable
  **************************************************************************************************/
 string Car::getModel()
 {
@@ -368,7 +419,7 @@ string Car::getModel()
 
 /**************************************************************************************************
  *						getYear
- *This is a getter emember function for the Car class to display the year variable
+ *This is a getter member function for the Car class to display the year variable
  **************************************************************************************************/
 int Car::getYear()
 {
@@ -377,13 +428,36 @@ int Car::getYear()
  
  /**************************************************************************************************
  *						getPurchasePrice
- *This is a getter emember function for the Car class to display the purchase price variable
+ *This is a getter member function for the Car class to display the purchase price variable
  **************************************************************************************************/
-int Car::getPurchasePrice()
+double Car::getPurchasePrice()
 {
 	return purchasePrice;
 }   
  
+/**************************************************************************************************
+ *						getIsSold
+ *This is a getter member function that returns a bool value. 
+ **************************************************************************************************/ 
+bool Car::getIsSold()
+{
+	return isSold;
+}
+
+/**************************************************************************************************
+ *						getProfit
+ *This is a getter member function that return a double for the profit of a sold car.
+ **************************************************************************************************/ 
+double Car::getProfit()
+{
+	if (isSold == true)
+	{
+		return (salePrice - purchasePrice); 
+	}
+	else
+		return NAN;
+}
+
 // CarLot class member function implementation section
 
 /**************************************************************************************************
@@ -396,72 +470,56 @@ int Car::getPurchasePrice()
  }
 
 /**************************************************************************************************
- *						listInventory
+ *						listCurrentInv
  *This function lists all the inventory items added to the vector in the CarLot class.
  **************************************************************************************************/
-void CarLot::listInventory()
+void CarLot::listCurrentInv()
 {
 	int length = inventory.size();	// variable for the end of the loop
+	int car_count = 0;		// variable to count how many car are in the inventory
+
 
 	cout << "This is what is in the car lot inventory.\n" << endl;
 	
 	// loop through the vector displaying all the information from the class
 	for (int i = 0; i < length; i++)
 	{
+		if (inventory[i].getIsSold() == false)		
+		{
 		// display basic information about the car
-		cout << "Make: " << inventory[i].car.getMaker() << endl;
-		cout << "Model: " << inventory[i].car.getModel() << endl;
-		cout << "Year: " << inventory[i].car.getYear() << endl;
+		cout << "Make: " << inventory[i].getMake() << endl;
+		cout << "Model: " << inventory[i].getModel() << endl;
+		cout << "Year: " << inventory[i].getYear() << endl;
 		cout << "Date Purchased: " << inventory[i].datePurchased.getMonth() << "/" << inventory[i].datePurchased.getDay() << "/" << inventory[i].datePurchased.getYear() << endl;
 		cout << "Purchase Price: $" << fixed << setprecision(2) << inventory[i].getPurchasePrice() << endl;
 		
-		// set up if else statement to display if the car is sold
-		/*
-		if (inventory[i].isSold == true)
-		{
-			cout << "Date Sold: " << carLot[i].dateSold.month << "/" << carLot[i].dateSold.day << "/" << carLot[i].dateSold.year << endl;
-  			cout << "Sale Price: $" << fixed << setprecision(2) << carLot[i].salePrice << endl;
-		} 
-		
+		car_count++;	// increase the number of cars in the inventory
+			
 		cout << endl;	
-		*/
+		}
 	}
+
+	cout << "The total number of cars in inventory are: " << car_count << endl; 
 
 } 
 
 /**************************************************************************************************
- *						CalculateProfits
+ *						getMonthProfit
  *
- *
- **************************************************************************************************/
-/*
- void CalculateProfits(vector<Car> &carLot)
+  **************************************************************************************************/
+double CarLot::getMonthProfit(int month, int year)
 {
-	int sales_month;		// variable used to calculate the profit for given month
-	int sales_year;			// variable used to calculate the profit for given year
-	int length = carLot.size();	// variable used for the size of the loop
+	int length = inventory.size();	// variable used for the size of the loop
 	double profit = 0;		// variable for the profit
-
-	// ask user for input for the month and year to calculate
-	cout << "Please enter the month and year you would like to calculate profits for." << endl;
-	
-	cout << "Month: ";
-	cin >> sales_month;
-
-	cout << "Year: ";
-	cin >> sales_year;
 
 	for (int i = 0; i < length; i++)
 	{
-		if ((carLot[i].isSold == true) && (carLot[i].dateSold.month == sales_month) && (carLot[i].dateSold.year == sales_year))
+		if ((inventory[i].getIsSold() == true) && (inventory[i].dateSold.getMonth() == month) && (inventory[i].dateSold.getYear() == year))
 		{
-			profit += (carLot[i].salePrice - carLot[i].purchasePrice);
+			profit += inventory[i].getProfit();
 		}  
 	}   
-
-	// display the profits for the given month
-	cout << "The total profits for sales on " << sales_month << "/" << sales_year << " are: $" << fixed << setprecision(2) << profit << endl;
-
-	cout << endl;
+	
+	return profit;
 }
-*/
+
