@@ -16,16 +16,61 @@
  ***************************************************************************************************/
  void Library::addBook()
  {
- 
+	std::string idc;
+    std::string t;
+    std:: string a;
+	
+	// clear the input buffer before storing strings
+	std::cin.ignore(10000,'\n');
+	
+	std::cout << "Enter the following information to create a new book in the library's system" << endl;
+	
+	std::cout << "Please enter the book's ID Code: ";
+	
+	std::getline(std::cin, idc);
+	
+	// ask for the title of the book
+	std::cout << "Please enter the book's title: ";
+	std::getline(std::cin, t);
+	
+	// ask for the author of the book
+	std::cout << "Please enter the book's author: ";
+	std::getline(std::cin, a);
+	
+	// pass variables to Book constructor and create object
+	Book newbook(idc, t, a);
+	
+	// add newly created Book object to holdings vector
+	holdings.push_back(newbook);
  }
  /**************************************************************************************************
  *								addMember															
- *This is a member function the prompts the user for patron info and uses it to creat a Patron, which
+ *This is a member function the prompts the user for patron info and uses it to create a Patron, which
  *is added to members vector.
  ***************************************************************************************************/
  void Library::addMember()
  {
- 
+	std::string idn; 
+	std::string n;
+	
+	// clear the input buffer before storing strings
+	std::cin.ignore(10000,'\n');
+	
+	std::cout << "Enter the following information to create a new member in the library's system" << endl;
+	
+	// ask user for ID number
+	std::cout << "Please enter an ID Number: ";
+	std::getline(std::cin, idn);
+	
+	// ask user for name
+	std::cout << "Please enter the account name: ";
+	std::getline(std::cin, n);
+	
+	// pass arguments to Patron constructor and create new object
+	Patron newpatron(idn, n);
+	
+	// add newly created Patron object to members vector
+	members.push_back(newpatron);
  }
  /**************************************************************************************************
  *								checkOutBook															
@@ -33,19 +78,69 @@
  ***************************************************************************************************/
  void Library::checkOutBook(std::string patronID, std::string bookID)
  {
-	// check to see if passed patronID do not exist
+	int members_length = members.length(),
+	holdings_length = holdings.length(),
+	book_position = 0,
+	members_check = 0,
+	holdings_check = 0;
+	
+	// check to see if passed patronID does not exist
+	for (int i = 0; i < members_length; i++)
+	{
+		// loop through vector and check if the patronID exists
+		if (members[i].getIdNum() == patronID)
+			members_check++;
+	}
+	
+	if (members_check == 0)
+	{
 		// if patronID does not exist print out message and return to menu
+		std::cout << "The patronID does not exist." << endl;
+		return;
+	}
+	
 	// check to see if passed bookID do not exist
+	for (int i = 0; i < holdings_length; i++)
+	{
+		// loop through vector and check if the bookID exists
+		if (holdings[i].getIdCode() == bookID)
+		{
+			holdings_check++;
+			book_position = i;
+		}
+	}
+	
+	if (holdings_check == 0)
+	{
 		// if bookId does not exist print out message and return to menu
+		std::cout << "The bookID does not exist." << endl;
+		return;
+	}
+	
 	// check to see if Book is already checked out (getLocation)
+	if (holdings[book_position].getLocation() == CHECKED_OUT)
+	{
 		// if Book is already checked print message and return to menu
+		std::cout << "The book is already checked out." << endl;
+		return;
+	}
+	
 	// check to see if Book is on hold by another Patron (getLocation)
+	else if (holdings[book_position].getLocation() == ON_HOLD)
+	{
 		// if Book is on hold print message and return to menu
+		std::cout << "The book is on hold for another patron." << endl;
+		return;
+	}
+	
 	// else update the Book checkedOutBy, dateCheckedOut and Location
+	else
+	{
 		// if Book was on hold for Patron
 			// update requestedBy
 		// update Patron list
 		// print Book 'title' has been checked out to Patron 'name'
+	}
  }
  /**************************************************************************************************
  *								returnBook															
@@ -69,11 +164,55 @@
  void Library::requestBook(std::string patronID, std::string bookID)
  {
 	// check to see if Book (bookID) or Patron (patronID) are not in Library
-		// if not print message and return to menu
+	int members_length = members.length(),
+	holdings_length = holdings.length(),
+	book_position = 0,
+	members_check = 0,
+	holdings_check = 0;
+	
+	// check to see if passed patronID does not exist
+	for (int i = 0; i < members_length; i++)
+	{
+		// loop through vector and check if the patronID exists
+		if (members[i].getIdNum() == patronID)
+			members_check++;
+	}
+	
+	if (members_check == 0)
+	{
+		// if patronID does not exist print out message and return to menu
+		std::cout << "The patronID does not exist." << endl;
+		return;
+	}
+	
+	// check to see if passed bookID do not exist
+	for (int i = 0; i < holdings_length; i++)
+	{
+		// loop through vector and check if the bookID exists
+		if (holdings[i].getIdCode() == bookID)
+		{
+			holdings_check++;
+			book_position = i;
+		}
+	}
+	
+	if (holdings_check == 0)
+	{
+		// if bookId does not exist print out message and return to menu
+		std::cout << "The bookID does not exist." << endl;
+		return;
+	}
+	
 	// if Book is requested by another Patron
+	if (holdings[i].getRequestedBy() != patronID)
+	{
 		// print message and return to menu
-	// else 
-		// update the Book requestedBy
+		std::cout << "Another patron has requested the book." << endl;
+		return;
+	}
+	
+	// update the Book requestedBy
+		
 		// if Book is ON_SHELF
 			// update location to ON_HOLD
 		// print Book 'title' is on request for Patron 'name'
@@ -84,7 +223,7 @@
  ***************************************************************************************************/
  void Library::incrementCurrentDate()
  {
-	// increament current date
+	// increment current date
 	// increase each Patron fine by DAILY_FINE for each overdue Book (use amendFine)
  }
  /**************************************************************************************************

@@ -11,6 +11,8 @@
 
 #include <vector>
 #include <stdio.h>
+#include <algorithm>
+#include <iostream>
 
 class Patron;
 class Book;
