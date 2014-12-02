@@ -9,6 +9,8 @@
 #ifndef examples_Book_h
 #define examples_Book_h
 
+#include <string>
+
 class Patron;
 
 enum Locale {ON_SHELF, ON_HOLD, CHECKED_OUT};

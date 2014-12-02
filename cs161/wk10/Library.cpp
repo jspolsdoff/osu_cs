@@ -1,5 +1,7 @@
 // Library.cpp is the Library class function implementation file.
 #include "Library.h"
+#include "Book.h"
+#include "Patron.h"
 
 /**************************************************************************************************
  *								Library															
@@ -18,7 +20,7 @@
  {
 	std::string idc;
     std::string t;
-    std:: string a;
+    std::string a;
 	
 	// clear the input buffer before storing strings
 	std::cin.ignore(10000,'\n');
@@ -134,13 +136,10 @@
 	}
 	
 	// else update the Book checkedOutBy, dateCheckedOut and Location
-	else
-	{
 		// if Book was on hold for Patron
 			// update requestedBy
 		// update Patron list
 		// print Book 'title' has been checked out to Patron 'name'
-	}
  }
  /**************************************************************************************************
  *								returnBook															
