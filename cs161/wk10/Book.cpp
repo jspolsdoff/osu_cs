@@ -2,6 +2,27 @@
 #include "Book.h"
 
 /**************************************************************************************************
+ *								Book								
+ *This is the default constructor for the Book class
+ ***************************************************************************************************/
+Book::Book()
+{
+
+}
+ /**************************************************************************************************
+ *								Book								
+ *This is a constructor for the Book class
+ ***************************************************************************************************/
+ Book::Book(std::string idc, std::string t, std::string a)
+ {
+	idCode = idc;
+    title = t;
+    author = a;
+    location = ON_SHELF;
+    checkedOutBy = NULL;
+	requestedBy = NULL;
+ }
+/**************************************************************************************************
  *								getCheckOutLength								
  *This is a member function that returns the how long a Book can be checked out for.
  ***************************************************************************************************/
@@ -9,7 +30,6 @@ int Book::getCheckOutLength()
 {
 	return CHECK_OUT_LENGTH;
 } 
-
 /**************************************************************************************************
  *								getIdCode
  *This is a member function that returns the unique identifier for a Book.
