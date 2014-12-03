@@ -19,8 +19,8 @@
  void Library::addBook()
  {
 	std::string idc;
-    std::string t;
-    std::string a;
+	std::string t;
+	std::string a;
 	
 	// clear the input buffer before storing strings
 	std::cin.ignore(10000,'\n');
@@ -273,12 +273,14 @@
 	}
 	
 	// print the Book ID, 'title', 'author' 'location'
-	std::cout << "Book ID: " << holdings[book_position].getIdCode();
+	std::cout << "Book ID: " << holdings[book_position].getIdCode() << std::endl;
 	
-	std::cout << "Title: " << holdings[book_position].getTitle();
+	std::cout << "Title: " << holdings[book_position].getTitle() << std::endl;
 	
-	std::cout << "Author: " << holdings[book_position].getAuthor();
+	std::cout << "Author: " << holdings[book_position].getAuthor() << std::endl;
 	
+	std::cout << "Location: " << holdings[book_position].getLocation() << std::endl;
+
 	// if it's on request print Patron that requested it
 	// if it's checked out print Patron that check it out and due date	
  }
