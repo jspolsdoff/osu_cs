@@ -25,7 +25,7 @@ private:
     int currentDate;
 public:
     static const double DAILY_FINE = 0.1;
-    Library()
+    Library();
     void addBook();
     void addMember();
     void checkOutBook(std::string patronID, std::string bookID);

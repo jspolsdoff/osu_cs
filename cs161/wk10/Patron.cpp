@@ -49,7 +49,7 @@
  ***************************************************************************************************/
  void Patron::addBook(Book* b)
  {
-	checkedOutBooks.pushback(*b);
+	checkedOutBooks.push_back(b);
  }
  /**************************************************************************************************
  *								removeBook								
@@ -63,8 +63,8 @@
 	for (int i = 0; i < length; i++)
 	{
 		// if the loop finds the books then delete the book and shift elements over
-		if (checkedOutBooks[i] == *b)
-			checkedOutBooks.erase(i);
+		if (checkedOutBooks[i] == b)
+			checkedOutBooks.erase(checkedOutBooks.begin() + i);
 	}
  }
  /**************************************************************************************************

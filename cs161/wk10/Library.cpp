@@ -25,7 +25,7 @@
 	// clear the input buffer before storing strings
 	std::cin.ignore(10000,'\n');
 	
-	std::cout << "Enter the following information to create a new book in the library's system" << endl;
+	std::cout << "Enter the following information to create a new book in the library's system" << std::endl;
 	
 	std::cout << "Please enter the book's ID Code: ";
 	
@@ -58,7 +58,7 @@
 	// clear the input buffer before storing strings
 	std::cin.ignore(10000,'\n');
 	
-	std::cout << "Enter the following information to create a new member in the library's system" << endl;
+	std::cout << "Enter the following information to create a new member in the library's system" << std::endl;
 	
 	// ask user for ID number
 	std::cout << "Please enter an ID Number: ";
@@ -80,8 +80,8 @@
  ***************************************************************************************************/
  void Library::checkOutBook(std::string patronID, std::string bookID)
  {
-	int members_length = members.length(),
-	holdings_length = holdings.length(),
+	int members_length = members.size(),
+	holdings_length = holdings.size(),
 	book_position = 0,
 	members_check = 0,
 	holdings_check = 0;
@@ -97,7 +97,7 @@
 	if (members_check == 0)
 	{
 		// if patronID does not exist print out message and return to menu
-		std::cout << "The patronID does not exist." << endl;
+		std::cout << "The patronID does not exist." << std::endl;
 		return;
 	}
 	
@@ -115,7 +115,7 @@
 	if (holdings_check == 0)
 	{
 		// if bookId does not exist print out message and return to menu
-		std::cout << "The bookID does not exist." << endl;
+		std::cout << "The bookID does not exist." << std::endl;
 		return;
 	}
 	
@@ -123,7 +123,7 @@
 	if (holdings[book_position].getLocation() == CHECKED_OUT)
 	{
 		// if Book is already checked print message and return to menu
-		std::cout << "The book is already checked out." << endl;
+		std::cout << "The book is already checked out." << std::endl;
 		return;
 	}
 	
@@ -131,7 +131,7 @@
 	else if (holdings[book_position].getLocation() == ON_HOLD)
 	{
 		// if Book is on hold print message and return to menu
-		std::cout << "The book is on hold for another patron." << endl;
+		std::cout << "The book is on hold for another patron." << std::endl;
 		return;
 	}
 	
@@ -163,8 +163,8 @@
  void Library::requestBook(std::string patronID, std::string bookID)
  {
 	// check to see if Book (bookID) or Patron (patronID) are not in Library
-	int members_length = members.length(),
-	holdings_length = holdings.length(),
+	int members_length = members.size(),
+	holdings_length = holdings.size(),
 	book_position = 0,
 	members_check = 0,
 	holdings_check = 0;
@@ -180,7 +180,7 @@
 	if (members_check == 0)
 	{
 		// if patronID does not exist print out message and return to menu
-		std::cout << "The patronID does not exist." << endl;
+		std::cout << "The patronID does not exist." << std::endl;
 		return;
 	}
 	
@@ -198,18 +198,16 @@
 	if (holdings_check == 0)
 	{
 		// if bookId does not exist print out message and return to menu
-		std::cout << "The bookID does not exist." << endl;
+		std::cout << "The bookID does not exist." << std::endl;
 		return;
 	}
 	
 	// if Book is requested by another Patron
-	if (holdings[i].getRequestedBy() != patronID)
-	{
-		// print message and return to menu
-		std::cout << "Another patron has requested the book." << endl;
-		return;
-	}
 	
+		// print message and return to menu
+		// std::cout << "Another patron has requested the book." << std::endl;
+		// return;
+		
 	// update the Book requestedBy
 		
 		// if Book is ON_SHELF
