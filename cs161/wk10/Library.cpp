@@ -250,9 +250,35 @@
  ***************************************************************************************************/
  void Library::viewBookInfo(std::string bookID)
  {
+	int holdings_length = holdings.size(),
+	book_position = 0,
+	holdings_check = 0;
+	
 	// check to see if Book does not exist in Library
-		// if not print out message and return to menu
+	for (int i = 0; i < holdings_length; i++)
+	{
+		// loop through vector and check if the bookID exists
+		if (holdings[i].getIdCode() == bookID)
+		{
+			holdings_check++;
+			book_position = i;
+		}
+	}
+	
+	if (holdings_check == 0)
+	{
+		// if bookId does not exist print out message and return to menu
+		std::cout << "The bookID does not exist." << std::endl;
+		return;
+	}
+	
 	// print the Book ID, 'title', 'author' 'location'
+	std::cout << "Book ID: " << holdings[book_position].getIdCode();
+	
+	std::cout << "Title: " << holdings[book_position].getTitle();
+	
+	std::cout << "Author: " << holdings[book_position].getAuthor();
+	
 	// if it's on request print Patron that requested it
 	// if it's checked out print Patron that check it out and due date	
  }

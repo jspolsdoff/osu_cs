@@ -115,8 +115,11 @@ int main()
 				cout << "This is option 9" << endl;
 
 				cout << "Please enter the Book ID to display book information: ";
-				cin >> bookID;
+				cin.ignore();
+				getline(cin, bookID);
 
+				library.viewBookInfo(bookID);
+				
 				break;	
 			}
 			// quit 
