@@ -24,7 +24,7 @@ int main()
 	int menu_choice = 0;	// variable to store menu choice
 	Library library;	// create library object	
 	string bookID,
-	string patronID;
+	patronID;
 
 	cout << "\nWELCOME TO THE LIBRARY\n" << endl;
 	

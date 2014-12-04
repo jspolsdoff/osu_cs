@@ -314,7 +314,7 @@
 			std::cout << holdings[i].getTitle() << std::endl;
 	}
 	
-	std::cout << "\nCurrent Fines: $" << fixed << setprecision(2) << members[members_position].getFineAmount() << std::endl;
+	std::cout << "\nCurrent Fines: $" << std::fixed << std::setprecision(2) << members[members_position].getFineAmount() << std::endl;
  }
  /**************************************************************************************************
  *								viewBookInfo															
@@ -354,10 +354,15 @@
 	std::cout << "Location: " << holdings[book_position].getLocation() << std::endl;
 
 	// if it's on request print Patron that requested it
+	if (holdings[book_position].getRequestedBy() != NULL)
+	{
+		std::cout << "Requested By: " << holdings[book_position].getRequestedBy()->getName() << std::endl;
+	}
+	// if it's checked out print Patron that check it out and due date	
 	if (holdings[book_position].getCheckedOutBy() != NULL)
 	{
 		std::cout << "Checked Out By: " << holdings[book_position].getCheckedOutBy()->getName() << std::endl;
-	}
-	// if it's checked out print Patron that check it out and due date	
- }
+	} 
+
+}
 
