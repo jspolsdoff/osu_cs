@@ -23,7 +23,8 @@ int main()
 {
 	int menu_choice = 0;	// variable to store menu choice
 	Library library;	// create library object	
-	string bookID;
+	string bookID,
+	string patronID;
 
 	cout << "\nWELCOME TO THE LIBRARY\n" << endl;
 	
@@ -71,12 +72,30 @@ int main()
 	  		case 2: 
 			{
 				cout << "This is option 2" << endl;
+				
+				// create patron object and add to library
+				library.addMember();
+				
 				break;
 			}
 			// check out book
 			case 3: 
 			{
-				cout << "This is option 3" << endl;			
+				cout << "This is option 3" << endl;	
+
+				// clear the input buffer before storing strings
+				cin.ignore(256,'\n');
+				
+				cout << "Please enter the following information to check out a book." << endl;
+				cout << "Patron ID: ";
+				getline(cin, patronID);
+				
+				cout << "Book ID: ";
+				getline(cin, bookID);
+				
+				// pass arguments to Library function and check out book
+				library.checkOutBook(patronID, bookID);
+				
 				break;
 			}
 			// return book
@@ -89,6 +108,20 @@ int main()
 			case 5: 
 			{
 				cout << "This is option 5" << endl;
+				
+				// clear the input buffer before storing strings
+				cin.ignore(256,'\n');
+				
+				cout << "Please enter the following information to request a book." << endl;
+				cout << "Patron ID: ";
+				getline(cin, patronID);
+				
+				cout << "Book ID: ";
+				getline(cin, bookID);
+				
+				// pass arguments to Library function and request book
+				library.requestBook(patronID, bookID);
+				
 				break;
 			}
 			// pay fine
@@ -107,6 +140,17 @@ int main()
 			case 8: 
 			{
 				cout << "This is option 8" << endl;
+				
+				// clear the input buffer before storing strings
+				cin.ignore(256,'\n');
+				
+				cout << "Please enter the following information to request patron information." << endl;
+				cout << "Patron ID: ";
+				getline(cin, patronID);
+				
+				// pass arguments to function and get requested patron information
+				library.viewPatronInfo(patronID);
+				
 				break;
 			}
 			// view book info
