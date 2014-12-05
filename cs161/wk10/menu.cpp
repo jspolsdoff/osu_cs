@@ -21,7 +21,8 @@ using namespace std;
 
 int main()
 {
-	int menu_choice = 0;	// variable to store menu choice
+	int menu_choice = 0,	// variable to store menu choice
+	fine_payment_amount = 0;
 	Library library;	// create library object	
 	string bookID,
 	patronID;
@@ -139,13 +140,25 @@ int main()
 			// pay fine
 			case 6: 
 			{
-				cout << "This is option 6" << endl;
+				// clear the input buffer before storing strings
+				cin.ignore(256,'\n');
+			
+				cout << "Please enter the following information to pay your fine." << endl;
+				cout << "Patron ID: ";
+				getline(cin, patronID);
+				
+				cout << "Payment Amount: ";
+				cin >> fine_payment_amount;
+				
+				library.payFine(patronID, fine_payment_amount);
+				
 				break;
 			}
 			// increment current date
 			case 7: 
 			{
-				cout << "This is option 7" << endl;
+				cout << "The current date has been incremented by one." << endl;
+				library.incrementCurrentDate();
 				break;
 			}
 			// view Patron info

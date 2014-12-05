@@ -299,6 +299,13 @@
 	currentDate++;
 	
 	// increase each Patron fine by DAILY_FINE for each overdue Book (use amendFine)
+	for (int i = 0; i < holdings.size(); i++)
+	{
+		if ((currentDate - holdings[i].getDateCheckedOut()) > CHECK_OUT_LENGTH)
+		{
+			holdings[i].getCheckedOutBy()->amendFine(DAILY_FINE);
+		}
+	}
  }
  /**************************************************************************************************
  *								payFine															
@@ -306,10 +313,32 @@
  ***************************************************************************************************/
  void Library::payFine(std::string patronID, double payment)
  {
-	// check to see if Patron (patronID) do not exist
-		// if not print out message and return to menu
+	int members_check = 0,
+	member_position = 0;
+	
+	// check to see if passed patronID does not exist
+	for (int i = 0; i < members.size(); i++)
+	{
+		// loop through vector and check if the patronID exists
+		if (members[i].getIdNum() == patronID)
+		{	
+			members_check++;
+			member_position = i;
+		}
+	}
+	
+	if (members_check == 0)
+	{
+		// if patronID does not exist print out message and return to menu
+		std::cout << "The patronID does not exist." << std::endl;
+		return;
+	}
+	
 	// use amendFine to update the Patron fine
-		// print out that fines for Patron 'name' are now Patron fineAmout
+	members[i].amendFine(payment);
+	
+	// print out that fines for Patron 'name' are now Patron fineAmout
+	std::cout << "The fine for " << members[i].getName() << " is now $" << std::fixed << std::setprecision(2) << members[i].getFineAmount() << std::endl;
  }
  /**************************************************************************************************
  *								viewPatronInfo															
