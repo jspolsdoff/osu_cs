@@ -170,14 +170,50 @@
  ***************************************************************************************************/
  void Library::returnBook(std::string bookID)
  {
-	// check to see if Book (bookID) does not exist in Library
-		// if does not exist print out message and return to menu
+	int holdings_length = holdings.size(),
+	book_position = 0,
+	holdings_check = 0;
+	Book* bookPtr;
+	
+	// check to see if passed bookID do not exist
+	for (int i = 0; i < holdings_length; i++)
+	{
+		// loop through vector and check if the bookID exists
+		if (holdings[i].getIdCode() == bookID)
+		{
+			holdings_check++;
+			book_position = i;
+			bookPtr = &holdings[i];
+		}
+	}
+	
+	if (holdings_check == 0)
+	{
+		// if bookId does not exist print out message and return to menu
+		std::cout << "The bookID does not exist." << std::endl;
+		return;
+	}
+	
 	// if book is not checked out
-		// print message and return to menu
+		if (holdings[book_position].getLocation() == ON_SHELF)
+	{
+		// if Book is already checked print message and return to menu
+		std::cout << "The book is not checked out." << std::endl;
+		return;
+	}
+	
 	// else
+	else
+	{
 		// update the Patron list
+		holdings[book_position].getCheckedOutBy()->removeBook(bookPtr);
+		
 		// update book location
+		holdings[book_position].setLocation(ON_SHELF);
+		
 		// print out the Book 'title' has been returned
+		std::cout << "CONFIRMED: The book " << holdings[book_position].getTitle() << " is returned." << std::endl;
+	}
  }
  /**************************************************************************************************
  *								requestBook															

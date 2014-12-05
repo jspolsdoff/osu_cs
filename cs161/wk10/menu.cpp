@@ -102,6 +102,18 @@ int main()
 			case 4: 
 			{
 				cout << "This is option 4" << endl;
+				
+				// clear the input buffer before storing strings
+				cin.ignore(256,'\n');
+				
+				cout << "Please enter the following information to return a book." << endl;
+				
+				cout << "Book ID: ";
+				getline(cin, bookID);
+				
+				// pass variables to the Library member function
+				library.returnBook(bookID);
+				
 				break;
 			}
 			// request book
