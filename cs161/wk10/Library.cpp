@@ -210,7 +210,9 @@
 		
 		// update book location
 		holdings[book_position].setLocation(ON_SHELF);
-		
+	
+		holdings[book_position].setCheckedOutBy(NULL);
+	
 		// print out the Book 'title' has been returned
 		std::cout << "CONFIRMED: The book " << holdings[book_position].getTitle() << " is returned." << std::endl;
 	}
