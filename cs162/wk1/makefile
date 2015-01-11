@@ -6,18 +6,18 @@ CXXFLAGS += -g
 #CXXFLAGS += -O3 
 LDFLAGS = -lboost_date_time
 
-OBJS = vector.o 
+OBJS = f.o g.o lab1-2.o
 
-SRCS = vector.cpp 
+SRCS = f.cpp g.cpp lab1-2.cpp
 
-HEADERS = 
+HEADERS = f.h g.h
 
 #target: dependencies
 # rule to build 
 #
 
-vector: ${OBJS} ${HEADERS}
-	${CXX} ${LDFLAGS} ${OBJS} -o vector
+lab1-2: ${OBJS} ${HEADERS}
+	${CXX} ${LDFLAGS} ${OBJS} -o lab1-2
 
 ${OBJS}: ${SRCS}
 	${CXX} ${CXXFLAGS} -c $(@:.o=.cpp)
