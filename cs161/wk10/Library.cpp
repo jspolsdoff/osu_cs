@@ -301,7 +301,7 @@
 	// increase each Patron fine by DAILY_FINE for each overdue Book (use amendFine)
 	for (int i = 0; i < holdings.size(); i++)
 	{
-		if ((currentDate - holdings[i].getDateCheckedOut()) > CHECK_OUT_LENGTH)
+		if ((currentDate - holdings[i].getDateCheckedOut()) > 21)
 		{
 			holdings[i].getCheckedOutBy()->amendFine(DAILY_FINE);
 		}
@@ -335,10 +335,10 @@
 	}
 	
 	// use amendFine to update the Patron fine
-	members[i].amendFine(payment);
+	members[member_position].amendFine(payment);
 	
 	// print out that fines for Patron 'name' are now Patron fineAmout
-	std::cout << "The fine for " << members[i].getName() << " is now $" << std::fixed << std::setprecision(2) << members[i].getFineAmount() << std::endl;
+	std::cout << "The fine for " << members[member_position].getName() << " is now $" << std::fixed << std::setprecision(2) << members[member_position].getFineAmount() << std::endl;
  }
  /**************************************************************************************************
  *								viewPatronInfo															

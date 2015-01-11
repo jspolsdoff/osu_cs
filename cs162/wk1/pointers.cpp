@@ -24,17 +24,9 @@ void Sort(int *x, int *y, int *z);
 int main()
 {
 	int x = 0,	// variables for user inputs
-		y = 0,
-		z = 0;
-	int *ptrx,	// corresponding pointers that will be used for function
-		*ptry,
-		*ptrz;
-
-	// assign pointers to corresponding variables
-	ptrx = &x;
-	ptry = &y;
-	ptrz = &z;
-		
+	    y = 0,
+	    z = 0;
+				
 	// ask user for input for first int variable and store
 	std::cout << "Please enter an integer value for x: ";
 	std::cin >> x;
@@ -51,7 +43,7 @@ int main()
 	std::cout << "These are the values you entered: " << x << " " << y << " " << z << std::endl;
 	
 	// pass pointers to void function
-	Sort(ptrx, ptry, ptrz);
+	Sort(&x, &y, &z);
 	
 	// print new variable values on screen
 	std::cout << "These are the values you entered after the function call: " << x << " " << y << " " << z << std::endl;
@@ -66,13 +58,14 @@ int main()
  ***************************************************************************************************/
  void Sort(int *x, int *y, int *z)
  {
+	
 	if (*x > *y)
-		std::swap(x, y);
+		std::swap(*x, *y);
 		
-	else if (*x > *z)
-		std::swap(x ,z);
+	if (*x > *z)
+		std::swap(*x ,*z);
 		
-	else if (*y > *z)
-		std::swap(y, z);
+	if (*y > *z)
+		std::swap(*y, *z);
 		
  }
