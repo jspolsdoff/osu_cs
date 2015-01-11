@@ -26,7 +26,7 @@ int main()
 	int x = 0,	// variables for user inputs
 	    y = 0,
 	    z = 0;
-				
+					
 	// ask user for input for first int variable and store
 	std::cout << "Please enter an integer value for x: ";
 	std::cin >> x;

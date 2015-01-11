@@ -3,5 +3,5 @@
 
 void g()
 {
-	std::cout << "This is function g!";
+	std::cout << "This is function g!" << std::endl;
 }

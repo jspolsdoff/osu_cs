@@ -18,7 +18,7 @@
 #include "f.h"
 #include "g.h"
 
-void main()
+int main()
 {
 	// call first function
 	f();
