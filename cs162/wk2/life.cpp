@@ -40,20 +40,15 @@ class Board
 	public:
 	void setBlinker();
 	void runLife();	// function to run 100 generations of the game of life
+	
+	void printBoard();	// test function to print the life array
 };
 
 int main()
 {
 	Board board;
 	
-	for (int row = 0; row < 80; row++)
-	{ for (int col = 0; col < 22; col++)
-		{
-			std::cout << std::setw(5) << board.life[row][col] << " ";
-		}
-		std::cout << std::endl;
-	}
-	
+	printBoard();
 	
 	// create board object
 	// display menu with choice of 3 patterns that the user can choose
@@ -88,6 +83,23 @@ void Cell::setAlive(bool status)
  *This function will tell you if the cell is dead or alive.
  **************************************************************************************************/ 
 bool Cell::getAlive()
-{
+ {
 	return alive;
-}
+ }
+
+// Board class member functions
+ /**************************************************************************************************
+ *						printBoard
+ *This function will print the board.
+ **************************************************************************************************/
+ void Board::printBoard()
+ {
+	for (int row = 0; row < 80; row++)
+	{ 
+		for (int col = 0; col < 22; col++)
+		{
+			std::cout << std::setw(5) << board.life[row][col] << " ";
+		}
+		std::cout << std::endl;
+	}
+ }
