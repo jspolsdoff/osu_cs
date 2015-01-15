@@ -30,14 +30,14 @@ int main()
 	// the row coordinate for the starting location
 	// the column coordinate for the starting location
 
-	std::cout << "WELCOME TO CONWAYS GAME OF LIFE/n" << std::endl;
+	std::cout << "\nWELCOME TO CONWAYS GAME OF LIFE\n" << std::endl;
 	
 	// user is told how big the life board is
 	std::cout << "The life board is 80 x 22 cells. You will be allowed to specify the starting location" << std::endl;
-	std::cout << "once you have selected your pattern./n" << std::endl;
+	std::cout << "once you have selected your pattern.\n" << std::endl;
 	
 	// user menu to select life pattern
-	std::cout << "Please choose from one of the patterns below to start the game./n" << std::endl;
+	std::cout << "Please choose from one of the patterns below to start the game.\n" << std::endl;
 	
 	std::cout << "1) Simple Oscillator" << std::endl;
 	// ask for the start location of the pattern
