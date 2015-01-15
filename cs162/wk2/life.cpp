@@ -18,71 +18,39 @@
 
 #include <iostream>
 
-// run game of life with simple oscillator pattern
-// run game of life with glider pattern
-// run game of life with gun pattern
+// create the class that will represent the cell object
+class Cell
+{
+	private:
+	bool alive;
+	
+	public:
+	Cell();	// default constructor that sets alive to F
+	void setAlive(bool);
+	bool getAlive();
+}
+
+// create the class that will represent the live board object
+class Board
+{
+	private:
+	const int NUM_COL = 80;
+	const int NUM_ROW = 22;
+	Cell life[NUM_ROW][NUM_COL];
+	
+	public:
+	setBoardBlinker();
+	void runLife();	// function to run 100 generations of the game of life
+}
 
 int main()
 {
-	// size of the visible world of life
-	// 2D array to hold the current generation of life
-	// 2D temp array to hold the next generation of life while logic runs on correct generation
-	// the row coordinate for the starting location
-	// the column coordinate for the starting location
-
-	std::cout << "\nWELCOME TO CONWAYS GAME OF LIFE\n" << std::endl;
-	
-	// user is told how big the life board is
-	std::cout << "The life board is 80 x 22 cells. You will be allowed to specify the starting location" << std::endl;
-	std::cout << "once you have selected your pattern.\n" << std::endl;
-	
-	// user menu to select life pattern
-	std::cout << "Please choose from one of the patterns below to start the game.\n" << std::endl;
-	
-	std::cout << "1) Simple Oscillator" << std::endl;
-	// ask for the start location of the pattern
-	// pass the starting location along with both 2D arrays to oscillator function
-	
-	std::cout << "2) Glider" << std::endl;
-	// ask for the start location of the pattern
-	// pass the starting location along with both 2D arrays to glider function
-	
-	std::cout << "3) Gun" << std::endl;
-	// ask for the start location of the pattern
-	// pass the starting location along with both 2D arrays to gun function
+	std::cout << "Just a quick test" << std::endl;
+	// create board object
+	// display menu with choice of 3 patterns that the user can choose
+		// ask for starting coordinates from user
+	// use if/else statement to call correct Board initialize member function
+	// call runLife function
 
 	return 0;
 }
-
- /**************************************************************************************************
- *					Oscillator																
- *
- ***************************************************************************************************/
-void Oscillator()
-{
-	// initialize life board with the oscillator pattern using nested loops and print
-	// run loop for 100 generations
-		// run logic rules through nested loop and store values
-		// print array
-		// copy temp array to original array
-		// print array
-		
-}
-
- /**************************************************************************************************
- *					Glider										
- *
- ***************************************************************************************************/
-void Glider()
-{
-
-}
-
- /**************************************************************************************************
- *					Gun											
- *
- ***************************************************************************************************/
-void Gun()
-{
-
-} 
