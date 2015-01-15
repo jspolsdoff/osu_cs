@@ -17,6 +17,7 @@
 **************************************************************************************************/
 
 #include <iostream>
+#include <iomanip>
 
 // create the class that will represent the cell object
 class Cell
@@ -48,7 +49,7 @@ int main()
 	for (int row = 0; row < 80; row++)
 	{ for (int col = 0; col < 22; col++)
 		{
-			std::cout << setw(5) << board[row][col] << " ";
+			std::cout << std::setw(5) << board.life[row][col] << " ";
 		}
 		std::cout << std::endl;
 	}
@@ -77,7 +78,7 @@ int main()
  *						setAlive
  *This function will set the status of the cell to either dead or alive.
  **************************************************************************************************/ 
-void Cell:setAlive(bool status)
+void Cell::setAlive(bool status)
  {
 	alive = status;
  }
