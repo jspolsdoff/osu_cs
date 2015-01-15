@@ -43,7 +43,17 @@ class Board
 
 int main()
 {
-	std::cout << "Just a quick test" << std::endl;
+	Board board;
+	
+	for (int row = 0; row < 80; row++)
+	{ for (int col = 0; col < 22; col++)
+		{
+			std::cout << setw(5) << board[row][col] << " ";
+		}
+		std::cout << std::endl;
+	}
+	
+	
 	// create board object
 	// display menu with choice of 3 patterns that the user can choose
 		// ask for starting coordinates from user
@@ -51,4 +61,32 @@ int main()
 	// call runLife function
 
 	return 0;
+}
+
+// Cell class member functions
+/**************************************************************************************************
+ *						Cell
+ *This is the constructor for the Cell class. It builds a Cell object default values.
+ **************************************************************************************************/ 
+ Cell::Cell()
+ {
+	alive = false;
+ }
+ 
+ /**************************************************************************************************
+ *						setAlive
+ *This function will set the status of the cell to either dead or alive.
+ **************************************************************************************************/ 
+void Cell:setAlive(bool status)
+ {
+	alive = status;
+ }
+ 
+ /**************************************************************************************************
+ *						getAlive
+ *This function will tell you if the cell is dead or alive.
+ **************************************************************************************************/ 
+bool Cell::getAlive()
+{
+	return alive;
 }
