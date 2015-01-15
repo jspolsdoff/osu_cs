@@ -28,20 +28,18 @@ class Cell
 	Cell();	// default constructor that sets alive to F
 	void setAlive(bool);
 	bool getAlive();
-}
+};
 
 // create the class that will represent the live board object
 class Board
 {
 	private:
-	const int NUM_COL = 80;
-	const int NUM_ROW = 22;
-	Cell life[NUM_ROW][NUM_COL];
+	Cell life[80][22];
 	
 	public:
-	setBoardBlinker();
+	void setBlinker();
 	void runLife();	// function to run 100 generations of the game of life
-}
+};
 
 int main()
 {
