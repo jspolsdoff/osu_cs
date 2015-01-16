@@ -1,7 +1,7 @@
 /**************************************************************************************************
 *Author:                           James Spolsdoff
 *Dated Created:                    1/15/15
-*Last Modified Date:               1/15/15
+*Last Modified Date:               1/16/15
 *Filename:                         menu.cpp
 *
 *Overview:
@@ -203,7 +203,43 @@ void Board::setBlinker(int start_row, int start_col)
  **************************************************************************************************/
  void Board::setGun(int start_row, int start_col)
  {
- 
+	// building the smallest glider gun 
+	life[start_row][start_col + 25].setAlive(true);
+	life[start_row + 1][start_col + 23].setAlive(true);
+ 	life[start_row + 1][start_col + 25].setAlive(true);
+	life[start_row + 2][start_col + 13].setAlive(true);
+	life[start_row + 2][start_col + 14].setAlive(true);
+	life[start_row + 2][start_col + 21].setAlive(true);
+	life[start_row + 2][start_col + 22].setAlive(true);
+	life[start_row + 2][start_col + 35].setAlive(true);
+	life[start_row + 2][start_col + 36].setAlive(true);
+	life[start_row + 3][start_col + 12].setAlive(true);
+	life[start_row + 3][start_col + 16].setAlive(true);
+	life[start_row + 3][start_col + 21].setAlive(true);
+	life[start_row + 3][start_col + 22].setAlive(true);
+	life[start_row + 3][start_col + 35].setAlive(true);
+	life[start_row + 3][start_col + 36].setAlive(true);
+	life[start_row + 4][start_col].setAlive(true);
+	life[start_row + 4][start_col + 1].setAlive(true);
+	life[start_row + 4][start_col + 11].setAlive(true);
+	life[start_row + 4][start_col + 17].setAlive(true);
+	life[start_row + 4][start_col + 21].setAlive(true);
+	life[start_row + 4][start_col + 22].setAlive(true);
+	life[start_row + 5][start_col].setAlive(true);
+	life[start_row + 5][start_col + 1].setAlive(true);
+	life[start_row + 5][start_col + 11].setAlive(true);
+	life[start_row + 5][start_col + 15].setAlive(true);
+	life[start_row + 5][start_col + 17].setAlive(true);
+	life[start_row + 5][start_col + 18].setAlive(true);
+	life[start_row + 5][start_col + 23].setAlive(true);
+	life[start_row + 5][start_col + 25].setAlive(true);
+	life[start_row + 6][start_col + 11].setAlive(true);
+	life[start_row + 6][start_col + 17].setAlive(true);
+	life[start_row + 6][start_col + 25].setAlive(true);
+	life[start_row + 7][start_col + 12].setAlive(true);
+	life[start_row + 7][start_col + 16].setAlive(true);
+	life[start_row + 8][start_col + 13].setAlive(true);
+	life[start_row + 8][start_col + 14].setAlive(true);
  }
  
 /**************************************************************************************************
