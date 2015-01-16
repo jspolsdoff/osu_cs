@@ -42,6 +42,8 @@ class Board
 	public:
 	Board();
 	void setBlinker(int start_row, int start_col);
+	void setGlider(int start_row, int start_col);
+	void setGun(int start_row, int start_col);
 	void runLife();	// function to run 100 generations of the game of life
 	
 	void printBoard();	// test function to print the life array
@@ -55,7 +57,7 @@ int main()
 	int start_row = 0;
 	int start_col = 0;
 	
-	life_board.printBoard();
+	// life_board.printBoard();
 	
 	// display menu with choice of 3 patterns that the user can choose
 	std::cout << "\nWELCOME TO CONWAYS GAME OF LIFE\n" << std::endl;
@@ -78,23 +80,38 @@ int main()
 	std::cin >> start_col;
 
 	// wrap in do/while loop for input validation 
-	// use if/else statement to call correct Board initialize member function
-	if (menu_choice == 1)
-	{	
-		std::cout << "Blinker pattern holder" << std::endl;
-		// build pattern by passing variables to function
-		life_board.setBlinker(start_row, start_col);
-		// call runLife function 
-		life_board.printBoard();
-	}
-	else if (menu_choice == 2)
-		std::cout << "Glider pattern holder" << std::endl;
-		// build pattern by passing variables to function
-	else if (menu_choice == 3)
-		std::cout << "Gun pattern holder" << std::endl;
-		// build pattern by passing variables to function
-	else if (menu_choice == 4)
-		exit(EXIT_SUCCESS); 
+	do {
+		// use if/else statement to call correct Board initialize member function
+		if (menu_choice == 1)
+		{	
+			std::cout << "Blinker pattern holder" << std::endl;
+			// build pattern by passing variables to function
+			life_board.setBlinker(start_row, start_col);
+			// call runLife function 
+			life_board.printBoard();
+			life_board.runLife();
+		}
+		else if (menu_choice == 2)
+		{
+			std::cout << "Glider pattern holder" << std::endl;
+			// build pattern by passing variables to function
+			life_board.setGlider(start_row, start_col);
+			// call runLife function
+			life_board.printBoard();
+			life_board.runLife();
+		}	
+		else if (menu_choice == 3)
+		{
+			std::cout << "Gun pattern holder" << std::endl;
+			// build pattern by passing variables to function
+			life_board.setGun(start_row, start_col);
+			// call runLife function
+			life_board.printBoard();
+			life_board.runLife();
+		}	
+		else if (menu_choice == 4)
+			exit(EXIT_SUCCESS); 
+	} while(!menu_choice == 4);
 	
 	return 0;
 }
@@ -157,6 +174,24 @@ void Board::setBlinker(int start_row, int start_col)
 		}
 	}
 }
+
+/**************************************************************************************************
+ *						setGlider
+ *This function will set up the Game of Life board with the blinker pattern. 
+ **************************************************************************************************/
+ void Board::setGlider()
+ {
+ 
+ }
+ 
+ /**************************************************************************************************
+ *						setGun
+ *This function will set up the Game of Life board with the blinker pattern. 
+ **************************************************************************************************/
+ void Board::setGun()
+ {
+ 
+ }
  
 /**************************************************************************************************
  *						runLife
@@ -174,24 +209,65 @@ void Board::runLife()
 			for (int col = 0; col < 80; col++)
 			{ 
 				// check upper-right diagonal for neighbor
-				if (life[row][col] == true)
+				if (life[row - 1][col + 1].getAlive() == true)
 					neighbors++;
 				// check right for neighbor
+				if (life[row][col +1].getAlive() == true)
+					neighbors++;
 				// check lower-right diagonal for neighbor
+				if (life[row + 1][col + 1].getAlive() == true)
+					neighbor++;
 				// check bottom neighbor
+				if (life[row + 1][col].getAlive() == true)
+					neighbor++;
 				// check lower-left diagonal for neughbor
+				if (life[row + 1][col -1].getAlive() == true)
+					neighbor++;
 				// check left neighbor
+				if (life[row][col -1].getAlive() == true)
+					neighbor++;
 				// check upper-left for neighbor
+				if (life[row - 1][col - 1].getAlive() == true)
+					neighbor++;
 				// check above for neighbor
+				if (life[row - 1][col].getAlive() == true)
+					neighbor++;
 			
 				// check if cell is currently alive
+				if (life[row][col].getAlive() == true)
+				{
 					// if neighbors less than or equal to 1 it dies
+					if (neighbors <= 1)
+						temp_life[row][col].setAlive(false);
 					// else if neighbors are greater than 3 it dies
+					else if (neighbors >= 3)
+						temp_life[row][col].setAlive(false);
 					// else it stays alive
+					else
+						temp_life[row][col].setAlive(true);
+				}
+				
 				// else current cell is dead
-					// if neighbors equal to 3 then there is a birth 	   
+				else
+					// if neighbors equal to 3 then there is a birth
+					if (neighbors == 3)
+						temp_life[row][col].setAlive(true);
+					else
+						temp_life[row][col].setAlive(false);
 			}
+			neighbors = 0;
 		}
+	
+		// copy temp_life over to life (need to test!!!!)
+		for (int row = 0; row < 22; row++)
+		{
+			for (int col = 0; col < 80; col++)
+			{ 
+				life[row][col].setAlive(temp_life[row][col].getAlive());
+			}
+		}	
+		// print the board of life
+		printBoard();	
 	}
 }
  
@@ -206,7 +282,6 @@ void Board::runLife()
 	{ 
 		for (int col = 0; col < 80; col++)
 		{
-			//std::cout << false;
 			std::cout << life[row][col].getAlive();
 		}
 		std::cout << std::endl;
