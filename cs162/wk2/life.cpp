@@ -19,6 +19,7 @@
 #include <iostream>
 #include <iomanip>
 #include <stdlib.h>
+#include <string>
 
 // create the class that will represent the cell object
 class Cell
@@ -158,6 +159,14 @@ Board::Board()
 			life[row][col].setAlive(false);
 		}
 	}
+
+	for (int row = 0; row < 22; row++)
+	{
+		for (int col = 0; col < 80; col++)
+		{
+			temp_life[row][col].setAlive(false);
+		}
+	} 
 }
 
 /**************************************************************************************************
@@ -179,16 +188,20 @@ void Board::setBlinker(int start_row, int start_col)
  *						setGlider
  *This function will set up the Game of Life board with the blinker pattern. 
  **************************************************************************************************/
- void Board::setGlider()
+ void Board::setGlider(int start_row, int start_col)
  {
- 
+	life[start_row][start_col + 1].setAlive(true);
+	life[start_row + 1][start_col + 2].setAlive(true);
+ 	life[start_row + 2][start_col].setAlive(true);
+	life[start_row + 2][start_col + 1].setAlive(true);
+	life[start_row + 2][start_col + 2].setAlive(true);
  }
  
  /**************************************************************************************************
  *						setGun
  *This function will set up the Game of Life board with the blinker pattern. 
  **************************************************************************************************/
- void Board::setGun()
+ void Board::setGun(int start_row, int start_col)
  {
  
  }
@@ -199,21 +212,23 @@ void Board::setBlinker(int start_row, int start_col)
  **************************************************************************************************/
 void Board::runLife()
 {
-	int neighbors = 0;
+	int neighbor = 0;
 
 	for (int gen = 0; gen < 100; gen++)
 	{
+		std::cout << "\nTHIS IS GENERATION " << (gen + 1) << "\n" << std::endl;
+
 		// nested loop to run through the whole life board
-		for (int row = 0; row < 22; row++)
+		for (int row = 1; row < 22; row++)
 		{
-			for (int col = 0; col < 80; col++)
+			for (int col = 1; col < 80; col++)
 			{ 
 				// check upper-right diagonal for neighbor
 				if (life[row - 1][col + 1].getAlive() == true)
-					neighbors++;
+					neighbor++;
 				// check right for neighbor
 				if (life[row][col +1].getAlive() == true)
-					neighbors++;
+					neighbor++;
 				// check lower-right diagonal for neighbor
 				if (life[row + 1][col + 1].getAlive() == true)
 					neighbor++;
@@ -236,26 +251,33 @@ void Board::runLife()
 				// check if cell is currently alive
 				if (life[row][col].getAlive() == true)
 				{
-					// if neighbors less than or equal to 1 it dies
-					if (neighbors <= 1)
+					// used during debug to test if the logic was working correctly
+					std::cout << "This is how many neighbor " << neighbor << std::endl;
+					
+					// if neighborsiless than or equal to 1 it dies
+					if (neighbor <= 1)
 						temp_life[row][col].setAlive(false);
 					// else if neighbors are greater than 3 it dies
-					else if (neighbors >= 3)
+					else if (neighbor > 3)
 						temp_life[row][col].setAlive(false);
 					// else it stays alive
-					else
+					else if (neighbor == 2)
+						temp_life[row][col].setAlive(true);
+					else if (neighbor == 3)
 						temp_life[row][col].setAlive(true);
 				}
 				
 				// else current cell is dead
 				else
+				{
 					// if neighbors equal to 3 then there is a birth
-					if (neighbors == 3)
+					if (neighbor == 3)
 						temp_life[row][col].setAlive(true);
-					else
-						temp_life[row][col].setAlive(false);
+					// else
+					//	temp_life[row][col].setAlive(false);
+				}
+				neighbor = 0;
 			}
-			neighbors = 0;
 		}
 	
 		// copy temp_life over to life (need to test!!!!)
