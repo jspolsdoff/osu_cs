@@ -250,7 +250,7 @@ void Board::runLife()
 {
 	int neighbor = 0;
 
-	for (int gen = 0; gen < 100; gen++)
+	for (int gen = 0; gen < 3; gen++)
 	{
 		std::cout << "\nTHIS IS GENERATION " << (gen + 1) << "\n" << std::endl;
 
@@ -287,9 +287,6 @@ void Board::runLife()
 				// check if cell is currently alive
 				if (life[row][col].getAlive() == true)
 				{
-					// used during debug to test if the logic was working correctly
-					std::cout << "This is how many neighbor " << neighbor << std::endl;
-					
 					// if neighborsiless than or equal to 1 it dies
 					if (neighbor <= 1)
 						temp_life[row][col].setAlive(false);
