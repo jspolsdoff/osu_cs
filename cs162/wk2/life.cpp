@@ -37,8 +37,8 @@ class Cell
 class Board
 {
 	private:
-	Cell life[22][80];
-	Cell temp_life[22][80];
+	Cell life[32][90];
+	Cell temp_life[32][90];
 	
 	public:
 	Board();
@@ -76,9 +76,13 @@ int main()
 	// ask for starting coordinates from user
 	std::cout << "Please enter start x coordinate for the pattern: ";
 	std::cin >> start_row;
+	// adding 5 to account for oversize board so that edges calculate correctly
+	start_row = start_row + 5;
 	
 	std::cout << "Please enter the start y coordinate for the pattern: ";
 	std::cin >> start_col;
+	// adding 5 to account for oversize board so that edges calculate correctly
+	start_col = start_col + 5;
 
 	// wrap in do/while loop for input validation 
 	do {
@@ -255,9 +259,9 @@ void Board::runLife()
 		std::cout << "\nTHIS IS GENERATION " << (gen + 1) << "\n" << std::endl;
 
 		// nested loop to run through the whole life board
-		for (int row = 1; row < 22; row++)
+		for (int row = 0; row <= 32; row++)
 		{
-			for (int col = 1; col < 80; col++)
+			for (int col = 0; col =< 90; col++)
 			{ 
 				// check upper-right diagonal for neighbor
 				if (life[row - 1][col + 1].getAlive() == true)
@@ -314,9 +318,9 @@ void Board::runLife()
 		}
 	
 		// copy temp_life over to life (need to test!!!!)
-		for (int row = 0; row < 22; row++)
+		for (int row = 0; row <= 32; row++)
 		{
-			for (int col = 0; col < 80; col++)
+			for (int col = 0; col <= 90; col++)
 			{ 
 				life[row][col].setAlive(temp_life[row][col].getAlive());
 			}
@@ -333,9 +337,9 @@ void Board::runLife()
  void Board::printBoard()
  {
 	
-	for (int row = 0; row < 22; row++)
+	for (int row = 5; row <= 27; row++)
 	{ 
-		for (int col = 0; col < 80; col++)
+		for (int col = 5; col <= 85; col++)
 		{
 			std::cout << life[row][col].getAlive();
 		}
