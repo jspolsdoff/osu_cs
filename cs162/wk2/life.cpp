@@ -250,7 +250,7 @@ void Board::runLife()
 {
 	int neighbor = 0;
 
-	for (int gen = 0; gen < 3; gen++)
+	for (int gen = 0; gen < 100; gen++)
 	{
 		std::cout << "\nTHIS IS GENERATION " << (gen + 1) << "\n" << std::endl;
 
