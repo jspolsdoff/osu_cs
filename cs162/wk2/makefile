@@ -20,7 +20,7 @@ PROGS = life
 
 all: ${PROGS}
 
-life: pointers.cpp
+life: life.cpp
 	${CXX} ${CXXFLAGS} life.cpp -o life
 
 clean: 

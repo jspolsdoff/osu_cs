@@ -74,12 +74,12 @@ int main()
 	std::cin >> menu_choice;
   
 	// ask for starting coordinates from user
-	std::cout << "Please enter start x coordinate for the pattern: ";
+	std::cout << "Please enter start row  coordinate for the pattern: ";
 	std::cin >> start_row;
 	// adding 5 to account for oversize board so that edges calculate correctly
 	start_row = start_row + 5;
 	
-	std::cout << "Please enter the start y coordinate for the pattern: ";
+	std::cout << "Please enter the start column coordinate for the pattern: ";
 	std::cin >> start_col;
 	// adding 5 to account for oversize board so that edges calculate correctly
 	start_col = start_col + 5;
@@ -89,7 +89,6 @@ int main()
 		// use if/else statement to call correct Board initialize member function
 		if (menu_choice == 1)
 		{	
-			std::cout << "Blinker pattern holder" << std::endl;
 			// build pattern by passing variables to function
 			life_board.setBlinker(start_row, start_col);
 			// call runLife function 
@@ -98,7 +97,6 @@ int main()
 		}
 		else if (menu_choice == 2)
 		{
-			std::cout << "Glider pattern holder" << std::endl;
 			// build pattern by passing variables to function
 			life_board.setGlider(start_row, start_col);
 			// call runLife function
@@ -107,7 +105,6 @@ int main()
 		}	
 		else if (menu_choice == 3)
 		{
-			std::cout << "Gun pattern holder" << std::endl;
 			// build pattern by passing variables to function
 			life_board.setGun(start_row, start_col);
 			// call runLife function
@@ -156,17 +153,17 @@ bool Cell::getAlive()
  **************************************************************************************************/ 
 Board::Board()
 {
-	for (int row = 0; row < 22; row++)
+	for (int row = 0; row < 32; row++)
 	{
-		for (int col = 0; col < 80; col++)
+		for (int col = 0; col < 90; col++)
 		{
 			life[row][col].setAlive(false);
 		}
 	}
 
-	for (int row = 0; row < 22; row++)
+	for (int row = 0; row < 32; row++)
 	{
-		for (int col = 0; col < 80; col++)
+		for (int col = 0; col < 90; col++)
 		{
 			temp_life[row][col].setAlive(false);
 		}
@@ -259,9 +256,9 @@ void Board::runLife()
 		std::cout << "\nTHIS IS GENERATION " << (gen + 1) << "\n" << std::endl;
 
 		// nested loop to run through the whole life board
-		for (int row = 0; row <= 32; row++)
+		for (int row = 2; row < 30; row++)
 		{
-			for (int col = 0; col =< 90; col++)
+			for (int col = 2; col < 88; col++)
 			{ 
 				// check upper-right diagonal for neighbor
 				if (life[row - 1][col + 1].getAlive() == true)
@@ -318,9 +315,9 @@ void Board::runLife()
 		}
 	
 		// copy temp_life over to life (need to test!!!!)
-		for (int row = 0; row <= 32; row++)
+		for (int row = 0; row < 32; row++)
 		{
-			for (int col = 0; col <= 90; col++)
+			for (int col = 0; col < 90; col++)
 			{ 
 				life[row][col].setAlive(temp_life[row][col].getAlive());
 			}
