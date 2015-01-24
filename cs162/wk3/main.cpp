@@ -10,7 +10,6 @@
 ***************************************************************************************************/
 
 #include <iostream>
-// include file stream
 #include <fstream>
 
 // function prototype that takes two input streams and output stream as arguments
@@ -19,30 +18,49 @@
 int main()
 {
 	// input stream for first file
-	ifstream inputFile1;
+	std::ifstream inputFile1;
+	
 	// input stream for second file
+	std::ifstream inputFile2;	
+
 	// output stream for destination file
+	std::ofstream outputFile;
+	
 	// variable to run output test on first file
 	int number;
 	
-	// open file
+	// open first input file
 	inputFile1.open("num1.txt");
+
+	// open second input file
+	inputFile2.open("num2.txt"); 
+
+	// open output file
+	outputFile.open("numout.txt"); 
 	
 	// test for file open errors
-	if (inputFile1)
+	if (inputFile1 && inputFile2)
 	{
-		// use while loop to print file contents to screen
+		// use while loop to print file contents to output file
 		while (inputFile1 >> number)
-			std::cout << number << std::endl;
+			outputFile << number << std::endl;
 			
 		// close file
 		inputFile1.close();
+
+		// use while loop to print file contents to output file
+		while (inputFile2 >> number)
+			outputFile << number << std::endl;
+
+		//close second input and out files
+		inputFile2.close();
+		outputFile.close(); 
 	}
 	
 	// else show error and end program
 	else
 	{
-		std::cout << "Error opening the file." << std::endl;
+		std::cout << "Error opening the files." << std::endl;
 	}
 	
 	return 0;
