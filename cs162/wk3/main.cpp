@@ -28,7 +28,10 @@ int main()
 	std::ofstream outputFile;
 	
 	// call function to sort and put numbers in output file
-	
+	sortFile(inputFile1, inputFile2, outputFile);	
+
+	std::cout << "The sort has been completed." << std::endl;
+
 	return 0;
 
 }
@@ -48,6 +51,14 @@ void sortFile(std::ifstream & if1,std::ifstream & if2,std::ofstream & of)
 
 	// open output file
 	of.open("numout.txt"); 
+
+	// create int variables for conparison
+	int num1 = 0;
+	int num2 = 0;
+
+	// put first value in file stream into int variable
+	if1 >> num1;
+	if2 >> num2; 
 		
 	// test for file open errors
 	if (if1 && if2)
@@ -55,10 +66,16 @@ void sortFile(std::ifstream & if1,std::ifstream & if2,std::ofstream & of)
 		// use a loop and the peek member function to compare numbers in each file 
 		while (if1 && if2)
 		{
-			if (if1.peek() < if2.peek())
-				of << if1.get();
+			if (num1 < num2)
+			{
+				of << num1 << std::endl;
+				if1 >> num1;
+			}
 			else
-				of << if2.get();
+			{
+				of << num2 << std::endl;
+				if2 >> num2;
+			}
 		}
 		
 		// use if statement with stream as parameter to check if end of stream is reached for first file
@@ -66,14 +83,20 @@ void sortFile(std::ifstream & if1,std::ifstream & if2,std::ofstream & of)
 		{	
 			// write rest of stream to output file
 			while (if1)
-				of << if1.get();
+			{
+				of << num1 << std::endl;
+				if1 >> num1;
+			}
 		}
 		// use if statement with stream as parameter to check if end of stream is reached for second file
 		if (if2)
 		{
 			// write rest of stream to output file
 			while (if2)
-				of << if2.get();
+			{
+				of << num2 << std::endl;
+				if2 >> num2;
+			}
 		}
 			
 		//close files
