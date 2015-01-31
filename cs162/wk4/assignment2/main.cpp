@@ -24,11 +24,12 @@ class Item
 	double price;			// unit price
 	
 	public:
+	Item();
 	Item(std::string, int, int, double);	// default constructor
-	getName();								// display name of item
-	getUnit();								// display the unit of item
-	getQuantity();							// display the number to buy
-	getPrice();								// display the unit price
+	std::string getName();								// display name of item
+	int getUnit();								// display the unit of item
+	int getQuantity();							// display the number to buy
+	double getPrice();								// display the unit price
 };
 
 // define the 'list' class
@@ -41,11 +42,11 @@ class List
 	
 	public:
 	List();									// constructor
-	addItem();								// adds an item to list vector
-	removeItem();							// removes an item from list vector
-	displayList();							// displays the list
-	readList();								// read a saved list
-	saveList();								// save a list to file
+	void addItem();								// adds an item to list vector
+	void removeItem();							// removes an item from list vector
+	void displayList();							// displays the list
+	void readList();								// read a saved list
+	void saveList();								// save a list to file
 };
 
 int main()
@@ -69,7 +70,7 @@ int main()
 		std::cout << "3) Display Grocery List" << std::endl;
 		std::cout << "4) Read List From File" << std::endl;
 		std::cout << "5) Save List To File" << std::endl;
-		std::cout << "6) Quit" << std: endl;
+		std::cout << "6) Quit" << std::endl;
 		
 		// ask user for menu input
 		std::cout << "Please enter your selection: ";
@@ -91,8 +92,8 @@ int main()
 			
 			// ask and store item name
 			std::cout << "Name: ";
-			// use getline to store string
-			
+			std::getline(std::cin, name);			
+
 			// ask and store unit of measure
 			std::cout << "Unit of Measure: ";
 			std::cin >> unit;
@@ -144,12 +145,27 @@ int main()
 
 // below are the 'item' member functions
 /**************************************************************************************************
-*						Item
-*Default constructor for the Item object.
-***************************************************************************************************/ 
+ *						Item
+ *Default constructor for the Item class.
+ **************************************************************************************************/
 Item::Item()
 {
+	name = " ";
+	unit = 0;
+	quantity_needed = 0;
+	price = 0;
+} 
 
+/**************************************************************************************************
+*						Item
+*Default constructor for the Item class.
+***************************************************************************************************/ 
+Item::Item(std::string a, int b, int c, double d)
+{
+	name = a;
+	unit = b;
+	quantity_needed = c;
+	price = d; 
 }
 
 // below are the 'list' member functions
