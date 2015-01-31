@@ -26,7 +26,7 @@ class Item
 	
 	public:
 	Item();
-	Item(std::string, string, int, double);	// default constructor
+	Item(std::string, std::string, int, double);	// default constructor
 	std::string getName();					// display name of item
 	std::string getUnit();					// display the unit of item
 	int getQuantity();						// display the number to buy
@@ -38,11 +38,12 @@ class List
 {
 	private:
 	std::vector<Item> item_list;			// vector composed of items
+	Item input_item;
 	std::ifstream inputList;				// input file stream
 	std::ofstream outputList;				// output file stream
 	
 	public:
-	void addItem();							// adds an item to list vector
+	void addItem(Item);						// adds an item to list vector
 	void removeItem(int);					// removes an item from list vector
 	void displayList();						// displays the list
 	void readList();						// read a saved list
@@ -85,77 +86,97 @@ int main()
 			std::cin >> menu_choice;
 		}  
 		
-		// add item option
-		case 1:
+		switch (menu_choice)
 		{
-			std::cout << "\nPlease enter the follow information about the item\n" << std::endl;
+			// add item option
+			case 1:
+			{
+				std::cout << "\nPlease enter the follow information about the item\n" << std::endl;
 			
-			// ask and store item name
-			std::cout << "Name: ";
-			std::getline(std::cin, name);			
+				// clear the input buffer
+				std::cin.clear();
+				std::cin.ignore(); 
+				 
+				// ask and store item name
+				std::cout << "Name: ";
+				std::getline(std::cin, name);			
 
-			// ask and store unit of measure
-			std::cout << "Unit of Measure: ";
-			std::getline(std::cin, unit);
+				// ask and store unit of measure
+				std::cout << "Unit of Measure: ";
+				std::getline(std::cin, unit);
 			
-			// ask and store quantity to buy
-			std::cout << "Quantity: ";
-			std::cin >> quantity;
+				// ask and store quantity to buy
+				std::cout << "Quantity: ";
+				std::cin >> quantity;
 			
-			// ask and store price
-			std::cout << "Price: ";
-			std::cin >> price;
+				// ask and store price
+				std::cout << "Price: ";
+				std::cin >> price;
 			
-			// pass variables to function and add item to list
-			Item new_item(name, unit, quantity, price);
+				// pass variables to function and add item to list
+				Item new_item(name, unit, quantity, price);
 			
-			// pass new_item object to grocery list object
-			shoppingList.addItem(new_item);
+				// pass new_item object to grocery list object
+				shoppingList.addItem(new_item);
 			
-			// display confirmation message
-			std::cout << "Your item has been successfully added to the list!" << std::endl;
+				// display confirmation message
+				std::cout << "Your item has been successfully added to the list!" << std::endl;
 		
-			break;	
-		}
+				break;	
+			}
 		
-		// remove item
-		case 2:
-		{
-			// ask user for what item they want remove
-			std::cout << "What item number would you like to remove from your list: ";
-			std::cin >> remove_item;
-			remove_item--;
-			
-			// pass variable to function
-			shoppingList.removeItem(remove_item);
-			break;	
-		}
+			// remove item
+			case 2:
+			{
+				// ask user for what item they want remove
+				std::cout << "What item number would you like to remove from your list: ";
+				std::cin >> remove_item;
+				remove_item--;
+				
+				// pass variable to function
+				shoppingList.removeItem(remove_item);
+				
+				// display confirmation message
+				std::cout << "Your item has been successfully removed from the list!" << std::endl; 
+
+				break;	
+			}
 		
-		// display list
-		case 3:
-		{
-			// call function to display list
-			shoppingList.displayList();
-			break;	
-		}
+			// display list
+			case 3:
+			{
+				// call function to display list
+				shoppingList.displayList();
+				break;	
+			}
 		
-		// read saved list
-		case 4:
-		{
-			break;	
-		}
+			// read saved list
+			case 4:
+			{
+				// use input list stream from grocery list object 
+				shoppingList.readList();
+
+				// display confirmation message
+				std::cout << "Your list has been successfully read from shoppinglist.txt!" << std::endl; 	
+				break;	
+			}
 		
-		// save list
-		case 5:
-		{
-			break;	
-		}
-		// quit program
-		case 6:
-		{
-			exit(EXIT_SUCCESS);
-		}
-		
+			// save list
+			case 5:
+			{
+				// use output list stream from grocery list object
+				shoppingList.saveList();
+
+				// display confirmation message
+				std::cout << "Your list has been successfully saved to shoppinglist.txt!" << std::endl; 
+				break;	
+			}
+			// quit program
+			case 6:
+			{
+				exit(EXIT_SUCCESS);
+			}
+		}		
 	} while(menu_choice != 6);	
 		
 	return 0;
@@ -169,7 +190,7 @@ int main()
 Item::Item()
 {
 	name = " ";
-	unit = 0;
+	unit = " ";
 	quantity_needed = 0;
 	price = 0;
 } 
@@ -210,7 +231,7 @@ Item::Item(std::string a, std::string b, int c, double d)
  **************************************************************************************************/
  int Item::getQuantity()
  {
-	return quantity;
+	return quantity_needed;
  }
  
  /**************************************************************************************************
@@ -272,7 +293,7 @@ void List::displayList()
 		
 		item_count++;	// increase the number of items in your grocery list
 			
-		std::cout << endl;	
+		std::cout << std::endl;	
 	}
 
 	std::cout << "The total number of items in your grocery list: " << item_count << std::endl; 
@@ -282,3 +303,69 @@ void List::displayList()
 *						saveList
 *
 **************************************************************************************************/
+void List::saveList()
+{
+	int length = item_list.size();
+
+	// open the output file
+	outputList.open("shoppinglist.txt");
+	
+	// use a loop to go through vector shopping list and copy items to file
+	for (int i = 0; i < length; i++)
+	{
+		outputList << item_list[i].getName() << "\n";
+		outputList << item_list[i].getUnit() << "\n";
+		outputList << item_list[i].getQuantity() << "\n";
+		outputList << std::fixed << std::setprecision(2) << item_list[i].getPrice() << "\n";
+	}
+	
+	// close the file
+	outputList.close(); 
+}
+
+/**************************************************************************************************
+ *						readList
+ *
+ **************************************************************************************************/
+void List::readList()
+{
+	std::string name;
+	std::string unit;
+	int quantity;
+	double price;
+
+	// open the input file
+	inputList.open("shoppinglist.txt");
+ 
+	// check for file open errors
+	if (inputList)
+ 	{
+		// use a while loop to extract data and place into item vector
+		while(!inputList.fail())
+		{
+			// pull all item information from file and store in variables
+			inputList >> name;
+			inputList >> unit;
+			inputList >> quantity;
+			inputList >>  price;
+					
+			// create item object and construct using variables from file	
+			Item input_item(name, unit, quantity, price);
+
+			// pass new item object to list vector for storage
+			item_list.push_back(input_item);
+		}
+
+		// not sure why when I run loop it adds an extra copy of last shopping list
+		// item. I am using the vector pop_back function as a fix
+		item_list.pop_back(); 
+		
+		// close the file
+		inputList.close(); 		
+	}
+	
+	else
+	{
+		std::cout << "Error opening the shopping list!\n" << std::endl;
+	}
+} 
