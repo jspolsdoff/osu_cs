@@ -28,7 +28,7 @@ class LoadedDice:public Dice
 {
 	public:
 	virtual int rollDice() const;
-}
+};
 
 // function prototype for rolling two dice together
 int rollTwoDice(const Dice& die1, const Dice& die2);
@@ -36,14 +36,17 @@ int rollTwoDice(const Dice& die1, const Dice& die2);
 // write the main function that will call the rolling dice functions
 int main()
 {
-	Dice die1, die2;
+	LoadedDice die1, die2;
 	int result = 0;
 	
 	std::cout << "This is a dice rolling simulator." << std::endl;
 	
-	result = rollTwoDice(die1, die2);
+	for (int i = 0; i < 100; i++)		
+	{
+		result = rollTwoDice(die1, die2);
 
-	std::cout << "The result of rolling two dice is: " << result << std::endl;
+		std::cout << result << std::endl;
+	}
 
 	return 0;
 }
@@ -83,7 +86,7 @@ int Dice::rollDice() const
  *						rollDice
  *
  **************************************************************************************************/
- int LoadedDice::rollDice() const;
+int LoadedDice::rollDice() const
 {
 	int loaded = 0;
 	
