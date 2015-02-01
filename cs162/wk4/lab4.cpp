@@ -21,25 +21,31 @@ class Dice
 	
 	protected:
 	int numSides;
-}
+};
 
 // define LoadedDice class that will be derived from the Dice class
 
 // function prototype for rolling two dice together
 int rollTwoDice(const Dice& die1, const Dice& die2);
 
+int randTest();
+
 // write the main function that will call the rolling dice functions
 int main()
 {
 	Dice die1, die2;
 	int result = 0;
+	int test = 0;
 	
 	std::cout << "This is a dice rolling simulator." << std::endl;
 	
 	result = rollTwoDice(die1, die2);
-	
+	test = randTest();	
+
 	std::cout << "The result of rolling two dice is: " << result << std::endl;
 	
+	std::cout << "This is the test 1-2 generator: " << test << std::endl;
+
 	return 0;
 }
 
@@ -87,4 +93,19 @@ int Dice::rollDice() const
 int rollTwoDice(const Dice& die1, const Dice& die2)
 {
 	return die1.rollDice() + die2.rollDice();
-} 
+}
+
+/**************************************************************************************************
+ *
+ *
+ **************************************************************************************************/
+int randTest()
+{
+	int loaded = 0;
+	
+	srand(time(NULL));
+	
+	loaded = (rand() % 2) + 1;
+
+	return loaded;
+}  
