@@ -24,35 +24,48 @@ class Filter
 class basicFilter:public Filter
 {
 	private:
-	
+	int key;	
+
 	public:
-	virtual void doFilter(int key);	// filter function will create an unchanged copy of the original file
+	basicFilter(int key);
+	virtual void doFilter();	// filter function will create an unchanged copy of the original file
 };
 	
 int main()
 {
 	int key = 0;
-	basicFilter filter1;
-	
+		
 	std::cout << "Please enter an integer encryption key: ";
-	cin >> key;
+	std::cin >> key;
 
-	filter1.doFilter(key);
+	basicFilter filter1(key);	
+
+	filter1.doFilter();
 
 	return 0;
 }
 
 // derived class member function
 /**************************************************************************************************
+ *
+ *
+ **************************************************************************************************/
+basicFilter::basicFilter(int x)
+{
+	key = x;
+}
+  
+/**************************************************************************************************
  *						doFilter
  *
  **************************************************************************************************/
- void basicFilter::doFilter(int key)
+ void basicFilter::doFilter()
  {
 	std::ifstream inputFile;	// create the input file stream
 	std::ofstream outputFile;	// create the outputfile stream
 	std::string input_line;
 	char x;
+	int offset = 0;
 		
 	// open input file
 	inputFile.open("original.txt");
@@ -71,10 +84,22 @@ int main()
 			
 			for(int i = 0;i < input_line.length(); i++)
 			{
-				x = (y[i] + key) % 26;
+					
+				if (y[i] >= 65 && y[i] <= 90)
+				{
+					offset = 65;
+				}
+				else if (y[i] >= 97 && y[i] <= 122)
+				{
+					offset = 97;
+				}
 				
+				x = ((y[i] - offset) + key) % 26 + offset;		
+			
 				outputFile << x;
 			}	
+		
+			outputFile << std::endl;	
 		}
 		
 		// close both files
