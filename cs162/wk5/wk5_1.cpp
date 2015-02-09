@@ -9,13 +9,12 @@
 ***************************************************************************************************/
 #include <iostream>
 #include <fstream>
+#include <string>
 
 // define base class that will be used for all file filters
 class Filter
 {
 	private:
-	std::ifstream inputFile;	// create the input file stream
-	std::ofstream outputFile;	// create the output file stream
 	
 	private:
 	virtual void doFilter() = 0;	// pure virtual function used to make transformations
@@ -30,10 +29,10 @@ class basicFilter:public Filter
 	virtual void doFilter();	// filter function will create an unchanged copy of the original file
 };
 	
-void main()
+int main()
 {
 	basicFilter filter1;
-	
+
 	filter1.doFilter();
 
 	return 0;
@@ -46,8 +45,10 @@ void main()
  **************************************************************************************************/
  void basicFilter::doFilter()
  {
-	char x;
-	
+	std::ifstream inputFile;	// create the input file stream
+	std::ofstream outputFile;	// create the outputfile stream
+	std::string input_line;
+		
 	// open input file
 	inputFile.open("original.txt");
 	
@@ -60,8 +61,13 @@ void main()
 		// use while loop to transfer information from input to output file
 		while (inputFile)
 		{
-			inputFile >> x;
-			outputFile << x;
+			getline(inputFile, input_line);
+			const char *y = input_line.c_str();
+			
+			for(int i = 0;i < input_line.length(); i++)
+			{
+				outputFile << y[i];
+			}	
 		}
 		
 		// close both files
