@@ -2,7 +2,7 @@
 *Author:                 James Spolsdoff
 *Date Created:           2/08/15
 *Last Modification Date: 2/08/15
-*Filename:               lab5_1.cpp
+*Filename:               lab5_3.cpp
 *
 *Overview
 *This program will act as a filter and using inheritance and polymorphism

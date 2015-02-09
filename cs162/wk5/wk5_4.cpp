@@ -2,7 +2,7 @@
 *Author:                 James Spolsdoff
 *Date Created:           2/08/15
 *Last Modification Date: 2/08/15
-*Filename:               lab5_2.cpp
+*Filename:               lab5_4.cpp
 *
 *Overview
 *This program will act as a filter and using inheritance and polymorphism
@@ -10,6 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <locale>
 
 // define base class that will be used for all file filters
 class Filter
@@ -94,9 +95,12 @@ basicFilter::basicFilter(int x)
 					offset = 97;
 				}
 				
-				x = ((y[i] - offset) + key) % 26 + offset;		
+				x = std::toupper(((y[i] - offset) + key) % 26 + offset);		
 			
 				outputFile << x;
+				
+				if (i % 5 == 0)
+					outputFile << " ";
 			}	
 		
 			outputFile << std::endl;	
