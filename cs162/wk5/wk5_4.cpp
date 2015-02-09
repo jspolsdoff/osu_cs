@@ -99,8 +99,11 @@ basicFilter::basicFilter(int x)
 			
 				outputFile << x;
 				
-				if (i % 5 == 0)
-					outputFile << " ";
+				if (i != 0)
+				{
+					if (i % 5 == 0)
+						outputFile << " ";
+				}
 			}	
 		
 			outputFile << std::endl;	
