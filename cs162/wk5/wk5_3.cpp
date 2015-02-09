@@ -49,6 +49,7 @@ int main()
 	std::ifstream inputFile;	// create the input file stream
 	std::ofstream outputFile;	// create the outputfile stream
 	std::string input_line;
+	char x;
 		
 	// open input file
 	inputFile.open("original.txt");
@@ -63,14 +64,17 @@ int main()
 		while (inputFile)
 		{
 			getline(inputFile, input_line);
-			std::toupper(input_line);
-			
+						
 			const char *y = input_line.c_str();
+			char x = std::toupper('a');
 			
 			for(int i = 0;i < input_line.length(); i++)
 			{
-				outputFile << y[i];
+				x = std::toupper(y[i]);
+				outputFile << x;
 			}	
+		
+			outputFile << std::endl;
 		}
 		
 		// close both files
