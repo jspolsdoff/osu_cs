@@ -1,7 +1,7 @@
 /**************************************************************************************************
 *Author:                 James Spolsdoff
-*Date Created:           1/28/14
-*Last Modification Date: 1/30/14
+*Date Created:           1/28/15
+*Last Modification Date: 1/30/15
 *Filename:               main.cpp
 *
 *Overview
@@ -347,7 +347,7 @@ void List::readList()
 			inputList >> name;
 			inputList >> unit;
 			inputList >> quantity;
-			inputList >>  price;
+			inputList >> price;
 					
 			// create item object and construct using variables from file	
 			Item input_item(name, unit, quantity, price);
