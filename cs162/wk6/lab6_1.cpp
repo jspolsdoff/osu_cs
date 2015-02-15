@@ -14,7 +14,7 @@
 #include <string>
 
 // function prototype for vetor search
-int conductSearch(vector<int> &, int);
+int conductSearch(std::vector<int> &, int);
 
 int main()
 {
@@ -59,7 +59,7 @@ int main()
 	
 	// analyze result and let user know if number was found
 	if (result == -1)
-		std::cout << "The number " << searach_value << " was not found." << std::endl;
+		std::cout << "The number " << search_value << " was not found." << std::endl;
 	else
 	{
 		std::cout << "The number " << search_value << " was found in position " << (result +1) << "!" << std::endl;
@@ -73,14 +73,14 @@ int main()
 *
 *
 ***************************************************************************************************/
-int conductSearch(vector<int> &numbers, int value)
+int conductSearch(std::vector<int> &numbers, int value)
 {
-	int index = 0	// set index to 0
+	int index = 0;		// set index to 0
 	int position = -1;	// set position to -1
 	bool found = false;	// set found to false
 	
 	// conduct search
-	while ((index < numbers.siz()) && !found)
+	while ((index < numbers.size()) && !found)
 	{
 		if (numbers[index] == value)
 		{
