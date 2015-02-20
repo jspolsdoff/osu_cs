@@ -33,8 +33,11 @@ int main()
 	// ask user for how many random numbers to generate
 	std::cout << "How many random numbers would you like to generate for each of the three files: ";
 	std::cin >> max_number;
-	
-	half_max = max_numbers / 2;
+
+	// dump input buffer
+	std::cin.ignore(10000, '\n');
+
+	half_max = max_number / 2;
 	
 	// ask user for name of files to write to
 	std::cout << "Please enter a name for file 1: ";
