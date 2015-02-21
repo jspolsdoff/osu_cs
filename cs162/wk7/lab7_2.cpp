@@ -1,7 +1,7 @@
 /**************************************************************************************************
 *Author:                 James Spolsdoff
 *Date Created:           2/20/15
-*Last Modification Date: 2/20/15
+*Last Modification Date: 2/21/15
 *Filename:               lab7_2.cpp
 *
 *Overview
