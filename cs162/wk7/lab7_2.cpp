@@ -11,9 +11,9 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <ctime>
-#include <ratio>
 #include <chrono>
+
+using namespace std::chrono;
 
 // function prototype for vetor search
 int conductSearch(std::vector<int> &, int);
@@ -27,8 +27,7 @@ int main()
 	int result;	// the result of the search
 	
 	// using high_resolution_clock example code from from cplusplus.com
-	using namespace std::chrono;
-	
+		
 	std::cout << "What file would you like to load: ";
 	std::cin >> filename;
 	
@@ -68,7 +67,7 @@ int main()
 	// stop timer and calculate result
 	high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
-	duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
+	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
 	
 	// analyze result and let user know if number was found
 	if (result == -1)
@@ -79,7 +78,7 @@ int main()
 	}
 
 	// display timer results
-	std::cout << "It took " << time_span.count() << " seconds to run this sort." << std::endl;
+	std::cout << "It took " << duration << " microseconds to run this sort." << std::endl;
 	
 	return 0;
 }
