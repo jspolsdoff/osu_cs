@@ -1,26 +1,30 @@
 /**************************************************************************************************
 *Author:                 James Spolsdoff
-*Date Created:           2/20/15
-*Last Modification Date: 2/20/15
-*Filename:               lab7_2.cpp
+*Date Created:           2/15/15
+*Last Modification Date: 2/15/15
+*Filename:               lab6_3.cpp
 *
 *Overview
-*
+*This program will be an example of code for searching algorithms. It will implement one
+*basic algorithm that searches for a 0 in my data files.
 ***************************************************************************************************/
 #include <iostream>
-#include <fstream>
 #include <vector>
+#include <fstream>
 #include <string>
 #include <ctime>
 #include <ratio>
 #include <chrono>
 
-// function prototype for vetor search
-int conductSearch(std::vector<int> &, int);
+// display function prototypes
+void sortVector(std::vector<int> &numbers);
+void displayVector(std::vector<int> numbers);
+int binarySearch(std::vector<int> &, int);	
 
 int main()
 {
 	std::ifstream inputFile;	// create file stream object
+	std::ofstream outputFile;
 	std::vector <int> numbers;	// create vector
 	std::string filename;	// variable used to store users filename input
 	int search_value;	// this is the value we are searching for
@@ -57,13 +61,16 @@ int main()
 	else
 	{
 		std::cout << "Error opening the files." << std::endl;
-	}		
-	
+	}
+
 	// start timer
 	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	
-	// conduct search
-	result = conductSearch(numbers, search_value);
+	// call sort vector function
+	sortVector(numbers);
+			
+	// call the binary search function
+	result = binarySearch(numbers, search_value);
 	
 	// stop timer and calculate result
 	high_resolution_clock::time_point t2 = high_resolution_clock::now();
@@ -76,8 +83,8 @@ int main()
 	else
 	{
 		std::cout << "The number " << search_value << " was found in position " << (result +1) << "!" << std::endl;
-	}
-
+	}	
+	
 	// display timer results
 	std::cout << "It took " << time_span.count() << " seconds to run this sort." << std::endl;
 	
@@ -85,28 +92,62 @@ int main()
 }
 
 /**************************************************************************************************
-*	conductSearch
+*	sortVector
 *
 *
 ***************************************************************************************************/
-int conductSearch(std::vector<int> &numbers, int value)
+void sortVector(std::vector<int> &numbers)
+{ 
+	int temp;
+	bool swap;
+
+	do
+	{ 
+		swap = false;
+
+		for (unsigned count = 0; count < numbers.size()-1; count++)
+		{
+
+			if (numbers[count] > numbers[count + 1])
+			{
+				temp = numbers[count];
+		
+				numbers[count] = numbers[count + 1];
+
+				numbers[count + 1] = temp;
+		
+				swap = true;
+			}
+		}
+	} while (swap);
+}
+
+/**************************************************************************************************
+*	binarySearch
+*
+*
+***************************************************************************************************/
+int binarySearch(std::vector<int> &numbers, int value)
 {
-	int index = 0;		// set index to 0
-	int position = -1;	// set position to -1
-	bool found = false;	// set found to false
+	int first = 0;
+	int last = numbers.size();
+	int middle;
+	int position = -1;
+	bool found = false;
 	
-	// conduct search
-	while ((index < numbers.size()) && !found)
+	while (!found && first <= last)
 	{
-		if (numbers[index] == value)
+		middle = (first + last) / 2;
+		
+		if (numbers[middle] == value)
 		{
 			found = true;
-			position = index;
+			position = middle;
 		}
-		
-		index++;
+		else if (numbers[middle] > value)
+			last = middle -1;
+		else first = middle + 1;	
 	}
 	
-	// return result
-	return position;	
-}
+	return position;
+}	
