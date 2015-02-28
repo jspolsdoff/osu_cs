@@ -13,6 +13,7 @@
 #include <vector>
 #include <string>
 #include <chrono>
+#include <algorithm>
 
 using namespace std::chrono;
 
@@ -37,7 +38,7 @@ int main()
 	
 	std::cout << "What number are we searching for: ";
 	std::cin >> search_value;
-	
+		
 	// open file
 	inputFile.open(filename.c_str());
 	
@@ -61,13 +62,16 @@ int main()
 	{
 		std::cout << "Error opening the files." << std::endl;
 	}
-
+	
+	for (int i = 0; i < 10; i++)
+	{		
 	// start timer
 	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	
 	// call sort vector function
-	sortVector(numbers);
-			
+	// sortVector(numbers);
+	std::sort(numbers.begin(), numbers.end());			
+		
 	// call the binary search function
 	result = binarySearch(numbers, search_value);
 	
@@ -86,7 +90,8 @@ int main()
 	
 	// display timer results
 	std::cout << "It took " << duration << " microseconds to run this sort." << std::endl;
-	
+	}	
+
 	return 0;
 }
 

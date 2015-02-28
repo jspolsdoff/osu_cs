@@ -57,7 +57,8 @@ int main()
 	{
 		std::cout << "Error opening the files." << std::endl;
 	}		
-	
+	for (int i = 0; i < 10; i++)
+	{
 	// start timer
 	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	
@@ -76,10 +77,10 @@ int main()
 	{
 		std::cout << "The number " << search_value << " was found in position " << (result +1) << "!" << std::endl;
 	}
-
+	
 	// display timer results
 	std::cout << "It took " << duration << " microseconds to run this sort." << std::endl;
-	
+	}
 	return 0;
 }
 

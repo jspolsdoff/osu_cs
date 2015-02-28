@@ -97,7 +97,7 @@ int Creature::getHealth()
  *						Barbarian
  *
  **************************************************************************************************/
- Barbarian:Barbarian()
+ Barbarian::Barbarian()
  {
 	str_points = 12;
 	armor = 0;
