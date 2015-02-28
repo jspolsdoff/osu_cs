@@ -72,8 +72,7 @@ class Goblin:public Creature
 	bool achilles;
 
 	public:
-	Goblin(int a, int b, int c, int d, int e, int f) : Creature(a, b, c, d, e, f)
-	{  achilles = false; }
+	Goblin();
 	int attack();
 	int defense(int); 
 };
@@ -93,9 +92,9 @@ int main()
 	std::cout << "4) Blue Men" << std::endl;
 	std::cout << "5) The Shadow\n" << std::endl; 
 
-	Goblin player1(8, 3, 2, 6, 1, 6);  
+	Goblin player1();  
 	
-	Goblin player2(8, 3, 2, 6, 1, 6);
+	Goblin player2();
 	
 	while ((player1.getHealth() > 0) && (player2.getHealth() > 0))
 	{
@@ -230,6 +229,20 @@ int TheShadow::defense(int opp_atk)
 }
 
 // special functions for goblin attack and defense
+/**************************************************************************************************
+ *						Goblin
+ *
+ **************************************************************************************************/
+Goblin::Goblin()
+{
+	str_points = 8;
+	armor = 3;
+	atk_die_num = 2;
+	atk_die_side = 6;
+	def_die_num = 1;
+	def_die_side = 6;
+	achilles = false;
+}
 /**************************************************************************************************
  *						attack
  *
