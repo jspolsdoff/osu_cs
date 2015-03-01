@@ -65,9 +65,20 @@ class Goblin : public Creature
 
 int main()
 {
-	Barbarian conan;
-	
-	std::cout << "A barbarian named Conan was created." << std::endl;
+	// create container of creature pointers for player 1
+	// create container of creature pointers for player 2
+	// create container of creature for player 1 losers
+	// create container of creature for player 2 losers
+	// variable for number of creatures in lineup
+	 
+	std::cout << "WELCOME TO THE WARRIOR'S ARENA\n" << std::endl;
+
+	// ask user for number of creatures to include in the line-up
+	// pass player 1 container to function to fill line-up
+	// pass player 2 container to function to fill line-up 
+	// do while loop to contain
+		// run fighter match-up function
+	//
 	
 	return 0;
 }
