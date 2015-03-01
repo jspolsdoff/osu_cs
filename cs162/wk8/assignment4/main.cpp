@@ -82,9 +82,13 @@ int main()
 	std::cin >> lineup_num;
 	
 	// pass player 1 container to function to fill line-up
+	std::cout << "Let's set up the fighter lineup for player 1." << std::endl;
 	FillLineup(lineup_num, p1_lineup);
 	
-	// pass player 2 container to function to fill line-up 
+	// pass player 2 container to function to fill line-up
+	std::cout << "Let's set up the fighter lineup for player 2." << std::endl;
+	FillLineup(lineup_num, p2_lineup);
+	
 	// do while loop to contain
 		// run fighter match-up function
 	//
@@ -315,11 +319,11 @@ void FillLineup(int lineup_num, std::queue<Creature *> & lineup)
 	
 	// display list of fighters
 	std::cout << "\nList of Creatures\n" << std::endl;
-	std::cout << "1) Goblin" << std::endl;
-	std::cout << "2) Barbarian" << std::endl;
-	std::cout << "3) Reptile People" << std::endl;
-	std::cout << "4) Blue Men" << std::endl;
-	std::cout << "5) The Shadow\n" << std::endl; 
+	std::cout << "1) Barbarian" << std::endl;
+	std::cout << "2) Reptile People" << std::endl;
+	std::cout << "3) Blue Men" << std::endl;
+	std::cout << "4) The Shadow" << std::endl;
+	std::cout << "5) Goblin\n" << std::endl; 
 	
 	// for loop to fill queue with creature pointers
 	for (int i = 0; i < lineup_num; i++)
@@ -337,15 +341,27 @@ void FillLineup(int lineup_num, std::queue<Creature *> & lineup)
 		}
 		// else if user selects 2 create reptile people and add to queue
 		else if (selection == 2)
-		{}
+		{
+			Creature *fighter = new ReptilePeople();
+			lineup.push(fighter);
+		}
 		// else if user selects 3 create blue men and add to queue
 		else if (selection == 3)
-		{}
+		{
+			Creature *fighter = new BlueMen();
+			lineup.push(fighter);
+		}
 		// else if user selects 4 create the shadow and add to queue
 		else if (selection == 4)
-		{}
+		{
+			Creature *fighter = new TheShadow();
+			lineup.push(fighter);
+		}
 		// else if user selects 5 create the goblin and add to queue
 		else if (selection == 5)
-		{}
+		{
+			Creature *fighter = new Goblin();
+			lineup.push(fighter);
+		}
 	}
 }
