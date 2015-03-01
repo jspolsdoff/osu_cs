@@ -75,14 +75,16 @@ class Goblin : public Creature
 void FillLineup(int lineup_num, std::queue<Creature *> & lineup);
 
 // function prototype to have the tournament begin
-void StartTourney(std::queue<Creature *> & p1_lineup, std::queue<Creature *> & p2_lineup, std::stack<Creature *> & losers); 	
+void StartTourney(std::queue<Creature *> & p1_lineup, std::queue<Creature *> & p2_lineup, std::stack<Creature *> & losers);
+
+// function prototype to calculate and display tournament ranking
+void FinalRank(std::stack<Creature *> & losers); 	
 
 int main()
 {
 	std::queue<Creature *> p1_lineup;	// create container of creature pointers for player 1
 	std::queue<Creature *> p2_lineup;	// create container of creature pointers for player 2
 	std::stack<Creature *> losers;	// create container of creature for losers
-	std::stack<Creature *> rank;	// final ranking after tournament complete
 	int lineup_num;	// variable for number of creatures in lineup
 	int p1_points = 0;
 	int p2_points = 0;
@@ -101,10 +103,13 @@ int main()
 	std::cout << "\nLet's set up the fighter lineup for player 2." << std::endl;
 	FillLineup(lineup_num, p2_lineup);
 	
-	// run fighter match-up function
+	// call fighter match-up function
 	StartTourney(p1_lineup, p2_lineup, losers);
 
 	std::cout << "\nThe tournament is over!\n" << std::endl;
+	
+	// call fighter ranking function
+	FinalRank(losers);
 	
 	return 0;
 }
@@ -477,7 +482,34 @@ void StartTourney(std::queue<Creature *> & p1_lineup, std::queue<Creature *> & p
 	}
 
 	if (team1_wins > team2_wins)
+	{	
 		std::cout << "\nTeam 1 has won the tournament!" << std::endl;
+		
+		// put final fighter in lineup for ranking calculation
+		losers.push(p1_lineup.front());
+	}
 	else
+	{
 		std::cout << "\nTeam 2 has won the tournament!" << std::endl;
+		
+		// put final fighter in lineup for ranking calculation
+		losers.push(p2_lineup.front());
+	}		
 } 	 
+
+/**************************************************************************************************
+ *						FinalRank
+ *
+ **************************************************************************************************/
+void FinalRank(std::stack<Creature *> & losers)
+{
+	std::cout << "THE TOP THREE FIGHTERS\n" std::endl;
+	
+	// use for loop to get information about top three fighers
+	for (int i = 0; i < 3; i++)
+	{
+		std::cout << (i + 1) << ") " << losers.top()->getName() << " with " << losers.top()->getWins() << " wins." << std::endl;
+		
+		losers.pop();
+	}
+} 
