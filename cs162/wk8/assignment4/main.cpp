@@ -29,6 +29,7 @@ class Creature
 	public:
 	virtual int attack();
 	virtual int defense(int);
+	std::string getName();
 	int getHealth();
 	void setWins();
 	int getWins();
@@ -103,7 +104,7 @@ int main()
 	// run fighter match-up function
 	StartTourney(p1_lineup, p2_lineup, losers);
 
-	std::cout << "The tournament is over!" std::endl;
+	std::cout << "\nThe tournament is over!\n" << std::endl;
 	
 	return 0;
 }
@@ -174,6 +175,15 @@ void Creature::setWins()
 int Creature::getWins()
 {
 	return wins;
+}
+
+/**************************************************************************************************
+ *						getName
+ *
+ **************************************************************************************************/ 
+std::string Creature::getName()
+{
+	return name;
 }
 
 // using polymorphism to construct barbarian
@@ -255,7 +265,7 @@ int TheShadow::defense(int opp_atk)
 	int special = 1;
 
 	special = (rand() % 2) + 1;
-	std::cout << "Special: " << special << std::endl;
+	// std::cout << "Special: " << special << std::endl;
 	
 	if (special == 1)
 		result = str_points;
@@ -414,6 +424,8 @@ void StartTourney(std::queue<Creature *> & p1_lineup, std::queue<Creature *> & p
 {
 	int turn = 2;
 	int health;
+	int team1_wins = 0;
+	int team2_wins = 0;
 	
 	while (p1_lineup.size() != 0 && p2_lineup.size() != 0)
 	{
@@ -428,6 +440,9 @@ void StartTourney(std::queue<Creature *> & p1_lineup, std::queue<Creature *> & p
 				
 				// add win to winning fighter
 				p1_lineup.front()->setWins();
+
+				// add win to player 1
+				team1_wins++;  
 				
 				// add loser to loser queue
 				losers.push(p2_lineup.front());
@@ -448,6 +463,9 @@ void StartTourney(std::queue<Creature *> & p1_lineup, std::queue<Creature *> & p
 				
 				// add win to winning fighter
 				p2_lineup.front()->setWins();
+
+				// add win to player 2
+				team2_wins++; 
 				
 				// add loser to loser queue
 				losers.push(p1_lineup.front());
@@ -457,4 +475,9 @@ void StartTourney(std::queue<Creature *> & p1_lineup, std::queue<Creature *> & p
 			}
 		}
 	}
+
+	if (team1_wins > team2_wins)
+		std::cout << "\nTeam 1 has won the tournament!" << std::endl;
+	else
+		std::cout << "\nTeam 2 has won the tournament!" << std::endl;
 } 	 
