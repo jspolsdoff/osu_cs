@@ -18,6 +18,7 @@
 class Creature
 {
 	protected:
+	std::string p_name;
 	std::string name;
 	int str_points;
 	int armor;
@@ -26,6 +27,7 @@ class Creature
 	int def_die_num;
 	int def_die_side;
 	int wins;
+	int team;
 	
 	public:
 	virtual int attack();
@@ -34,6 +36,8 @@ class Creature
 	int getHealth();
 	void setWins();
 	int getWins();
+	std::string getPName();
+	int getTeam();
 };
 
 class Barbarian : public Creature
@@ -73,7 +77,7 @@ class Goblin : public Creature
 };
 
 // function prototype to fill creature lineup
-void FillLineup(int lineup_num, std::queue<Creature *> & lineup);
+void FillLineup(int lineup_num, std::queue<Creature *> & lineup, int team);
 
 // function prototype to have the tournament begin
 void StartTourney(std::queue<Creature *> & p1_lineup, std::queue<Creature *> & p2_lineup, std::stack<Creature *> & losers);
@@ -88,8 +92,8 @@ int main()
 	std::stack<Creature *> losers;	// create container of creature for losers
 	std::deque<Creature *> rank;	// create container for final ranking
 	int lineup_num;	// variable for number of creatures in lineup
-	int p1_points = 0;
-	int p2_points = 0;
+	int team1 = 1;
+	int team2 = 2;
 	 
 	std::cout << "\nWELCOME TO THE WARRIOR'S ARENA\n" << std::endl;
 
@@ -99,11 +103,11 @@ int main()
 	
 	// pass player 1 container to function to fill line-up
 	std::cout << "\nLet's set up the fighter lineup for player 1." << std::endl;
-	FillLineup(lineup_num, p1_lineup);
+	FillLineup(lineup_num, p1_lineup, team1);
 	
 	// pass player 2 container to function to fill line-up
 	std::cout << "\nLet's set up the fighter lineup for player 2." << std::endl;
-	FillLineup(lineup_num, p2_lineup);
+	FillLineup(lineup_num, p2_lineup, team2);
 	
 	// call fighter match-up function
 	StartTourney(p1_lineup, p2_lineup, losers);
@@ -158,6 +162,15 @@ int Creature::defense(int opp_atk)
 }
 
 /**************************************************************************************************
+ *						getPName
+ *
+ **************************************************************************************************/
+std::string Creature::getPName()
+{
+	return p_name;
+} 
+
+/**************************************************************************************************
  *						getHealth
  *
  **************************************************************************************************/
@@ -193,13 +206,23 @@ std::string Creature::getName()
 	return name;
 }
 
+/**************************************************************************************************
+ *						getTeam
+ *
+ **************************************************************************************************/ 
+int Creature::getTeam()
+{
+	return team;
+}
+
 // using polymorphism to construct barbarian
 /**************************************************************************************************
  *						Barbarian
  *
  **************************************************************************************************/
-Barbarian::Barbarian()
+Barbarian::Barbarian(std::string input_name, int teama)
  {
+	p_name = input_name;
 	name = "Barbarian";
 	str_points = 12;
 	armor = 0;
@@ -208,6 +231,7 @@ Barbarian::Barbarian()
 	def_die_num = 2;
 	def_die_side = 6;
 	wins = 0;
+	team = teama;
  }
  
  // using polymorphism to construct ReptilePeople
@@ -215,8 +239,9 @@ Barbarian::Barbarian()
  *						ReptilePeople
  *
  **************************************************************************************************/
-ReptilePeople::ReptilePeople()
+ReptilePeople::ReptilePeople(std::string input_name, int teama)
  {
+	p_name = input_name;
 	name = "Reptile People";
 	str_points = 18;
 	armor = 7;
@@ -225,6 +250,7 @@ ReptilePeople::ReptilePeople()
 	def_die_num = 1;
 	def_die_side = 6;
 	wins = 0;
+	team = teama;
  }
  
  // using polymorphism to construct BlueMen
@@ -232,8 +258,9 @@ ReptilePeople::ReptilePeople()
  *						BlueMen
  *
  **************************************************************************************************/
-BlueMen::BlueMen()
+BlueMen::BlueMen(std::string input_name, int teama)
  {
+	p_name = input_name;
 	name = "Blue Men";
 	str_points = 12;
 	armor = 3;
@@ -242,6 +269,7 @@ BlueMen::BlueMen()
 	def_die_num = 3;
 	def_die_side = 6;
 	wins = 0;
+	team = teama;
  }
  
  // using polymorphism to construct TheShadow
@@ -249,8 +277,9 @@ BlueMen::BlueMen()
  *						TheShadow
  *
  **************************************************************************************************/
-TheShadow::TheShadow()
+TheShadow::TheShadow(std::string input_name, int teama)
  {
+	p_name = input_name;
 	name = "The Shadow";
 	str_points = 12;
 	armor = 0;
@@ -259,6 +288,7 @@ TheShadow::TheShadow()
 	def_die_num = 1;
 	def_die_side = 6;
 	wins = 0;
+	team = teama;
  }
  
  /**************************************************************************************************
@@ -299,8 +329,9 @@ int TheShadow::defense(int opp_atk)
  *						Goblin
  *
  **************************************************************************************************/
-Goblin::Goblin()
+Goblin::Goblin(std::string input_name, int teama)
  {
+	p_name = input_name;
 	name = "Goblin";
 	str_points = 8;
 	armor = 3;
@@ -310,6 +341,7 @@ Goblin::Goblin()
 	def_die_side = 6;
 	wins = 0;
 	achilles = false;
+	team = teama;
  }
  
  /**************************************************************************************************
@@ -369,10 +401,11 @@ int Goblin::defense(int opp_atk)
  *						FillLineup
  *
  **************************************************************************************************/
-void FillLineup(int lineup_num, std::queue<Creature *> & lineup)
+void FillLineup(int lineup_num, std::queue<Creature *> & lineup, int team)
 {
 	Creature *fighter;	// declare pointer to Creature class
 	int selection;
+	std::string input_name;
 	
 	// display list of fighters
 	std::cout << "\nList of Creatures\n" << std::endl;
@@ -386,6 +419,9 @@ void FillLineup(int lineup_num, std::queue<Creature *> & lineup)
 	for (int i = 0; i < lineup_num; i++)
 	{
 		// ask user for choice and store value
+		std::cout << "Please enter name for creature for position " << (i + 1) << " in your lineup: ";
+		getline(cin, input_name);
+		
 		std::cout << "Please select a creature for position " << (i + 1) << " in your lineup: ";
 		std::cin >> selection;
 		
@@ -393,31 +429,31 @@ void FillLineup(int lineup_num, std::queue<Creature *> & lineup)
 		// if user selects 1 create barbarian and add to queue
 		if (selection == 1)
 		{
-			Creature *fighter = new Barbarian();
+			Creature *fighter = new Barbarian(input_name, team);
 			lineup.push(fighter);
 		}
 		// else if user selects 2 create reptile people and add to queue
 		else if (selection == 2)
 		{
-			Creature *fighter = new ReptilePeople();
+			Creature *fighter = new ReptilePeople(input_name, team);
 			lineup.push(fighter);
 		}
 		// else if user selects 3 create blue men and add to queue
 		else if (selection == 3)
 		{
-			Creature *fighter = new BlueMen();
+			Creature *fighter = new BlueMen(input_name, team);
 			lineup.push(fighter);
 		}
 		// else if user selects 4 create the shadow and add to queue
 		else if (selection == 4)
 		{
-			Creature *fighter = new TheShadow();
+			Creature *fighter = new TheShadow(input_name, team);
 			lineup.push(fighter);
 		}
 		// else if user selects 5 create the goblin and add to queue
 		else if (selection == 5)
 		{
-			Creature *fighter = new Goblin();
+			Creature *fighter = new Goblin(input_name, team);
 			lineup.push(fighter);
 		}
 	}
@@ -510,7 +546,7 @@ void FinalRank(std::stack<Creature *> & losers)
 	// use for loop to get information about top three fighers
 	for (int i = 0; i < 3; i++)
 	{
-		std::cout << (i + 1) << ") " << losers.top()->getName() << " with " << losers.top()->getWins() << " wins." << std::endl;
+		std::cout << (i + 1) << ") " loswer.top()->getPName() << ", a "<< losers.top()->getName() << " on Team " << losers.top()->getTeam() << "." << std::endl;
 		
 		losers.pop();
 	}
