@@ -43,25 +43,25 @@ class Creature
 class Barbarian : public Creature
 {
 	public:
-	Barbarian();
+	Barbarian(std::string input_name, int teama);
 };
 
 class ReptilePeople : public Creature
 {
 	public:
-	ReptilePeople();
+	ReptilePeople(std::string input_name, int teama);
 };
 
 class BlueMen : public Creature
 {
 	public:
-	BlueMen();
+	BlueMen(std::string input_name, int teama);
 };
 
 class TheShadow : public Creature
 {
 	public:
-	TheShadow();
+	TheShadow(std::string input_name, int teama);
 	int defense(int);
 };
 
@@ -71,7 +71,7 @@ class Goblin : public Creature
 	bool achilles;
 	
 	public:
-	Goblin();
+	Goblin(std::string input_name, int teama);
 	virtual int attack();
 	virtual int defense(int);
 };
@@ -83,7 +83,7 @@ void FillLineup(int lineup_num, std::queue<Creature *> & lineup, int team);
 void StartTourney(std::queue<Creature *> & p1_lineup, std::queue<Creature *> & p2_lineup, std::stack<Creature *> & losers);
 
 // function prototype to calculate and display tournament ranking
-void FinalRank(std::stack<Creature *> & losers, std::de); 	
+void FinalRank(std::stack<Creature *> & losers); 	
 
 int main()
 {
@@ -418,9 +418,11 @@ void FillLineup(int lineup_num, std::queue<Creature *> & lineup, int team)
 	// for loop to fill queue with creature pointers
 	for (int i = 0; i < lineup_num; i++)
 	{
+		std::cin.ignore(1000, '\n');
+
 		// ask user for choice and store value
 		std::cout << "Please enter name for creature for position " << (i + 1) << " in your lineup: ";
-		getline(cin, input_name);
+		getline(std::cin, input_name);
 		
 		std::cout << "Please select a creature for position " << (i + 1) << " in your lineup: ";
 		std::cin >> selection;
@@ -546,7 +548,7 @@ void FinalRank(std::stack<Creature *> & losers)
 	// use for loop to get information about top three fighers
 	for (int i = 0; i < 3; i++)
 	{
-		std::cout << (i + 1) << ") " loswer.top()->getPName() << ", a "<< losers.top()->getName() << " on Team " << losers.top()->getTeam() << "." << std::endl;
+		std::cout << (i + 1) << ") " << losers.top()->getPName() << ", a "<< losers.top()->getName() << " on Team " << losers.top()->getTeam() << "." << std::endl;
 		
 		losers.pop();
 	}
