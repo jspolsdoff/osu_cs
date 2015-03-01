@@ -13,6 +13,7 @@
 #include <time.h>
 #include <queue>
 #include <stack>
+#include <deque>
 
 class Creature
 {
@@ -78,13 +79,14 @@ void FillLineup(int lineup_num, std::queue<Creature *> & lineup);
 void StartTourney(std::queue<Creature *> & p1_lineup, std::queue<Creature *> & p2_lineup, std::stack<Creature *> & losers);
 
 // function prototype to calculate and display tournament ranking
-void FinalRank(std::stack<Creature *> & losers); 	
+void FinalRank(std::stack<Creature *> & losers, std::de); 	
 
 int main()
 {
 	std::queue<Creature *> p1_lineup;	// create container of creature pointers for player 1
 	std::queue<Creature *> p2_lineup;	// create container of creature pointers for player 2
 	std::stack<Creature *> losers;	// create container of creature for losers
+	std::deque<Creature *> rank;	// create container for final ranking
 	int lineup_num;	// variable for number of creatures in lineup
 	int p1_points = 0;
 	int p2_points = 0;
@@ -503,7 +505,7 @@ void StartTourney(std::queue<Creature *> & p1_lineup, std::queue<Creature *> & p
  **************************************************************************************************/
 void FinalRank(std::stack<Creature *> & losers)
 {
-	std::cout << "THE TOP THREE FIGHTERS\n" std::endl;
+	std::cout << "THE TOP THREE FIGHTERS\n" << std::endl;
 	
 	// use for loop to get information about top three fighers
 	for (int i = 0; i < 3; i++)
