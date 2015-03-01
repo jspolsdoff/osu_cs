@@ -8,6 +8,7 @@
 *
 ***************************************************************************************************/
 #include <iostream>
+#include <string>
 #include <stdlib.h>
 #include <time.h>
 #include <queue>
@@ -16,17 +17,21 @@
 class Creature
 {
 	protected:
+	std::string name;
 	int str_points;
 	int armor;
 	int atk_die_num;
 	int atk_die_side;
 	int def_die_num;
 	int def_die_side;
+	int wins;
 	
 	public:
 	virtual int attack();
 	virtual int defense(int);
 	int getHealth();
+	void setWins();
+	int getWins();
 };
 
 class Barbarian : public Creature
@@ -66,32 +71,39 @@ class Goblin : public Creature
 };
 
 // function prototype to fill creature lineup
-void FillLineup(int lineup_num, std::queue<Creature *> & lineup);	
+void FillLineup(int lineup_num, std::queue<Creature *> & lineup);
+
+// function prototype to have the tournament begin
+void StartTourney(std::queue<Creature *> & p1_lineup, std::queue<Creature *> & p2_lineup, std::stack<Creature *> & losers); 	
 
 int main()
 {
 	std::queue<Creature *> p1_lineup;	// create container of creature pointers for player 1
 	std::queue<Creature *> p2_lineup;	// create container of creature pointers for player 2
 	std::stack<Creature *> losers;	// create container of creature for losers
+	std::stack<Creature *> rank;	// final ranking after tournament complete
 	int lineup_num;	// variable for number of creatures in lineup
+	int p1_points = 0;
+	int p2_points = 0;
 	 
-	std::cout << "WELCOME TO THE WARRIOR'S ARENA\n" << std::endl;
+	std::cout << "\nWELCOME TO THE WARRIOR'S ARENA\n" << std::endl;
 
 	// ask user for number of creatures to include in the line-up
 	std::cout << "How many fighters will be in each players line-up: ";
 	std::cin >> lineup_num;
 	
 	// pass player 1 container to function to fill line-up
-	std::cout << "Let's set up the fighter lineup for player 1." << std::endl;
+	std::cout << "\nLet's set up the fighter lineup for player 1." << std::endl;
 	FillLineup(lineup_num, p1_lineup);
 	
 	// pass player 2 container to function to fill line-up
-	std::cout << "Let's set up the fighter lineup for player 2." << std::endl;
+	std::cout << "\nLet's set up the fighter lineup for player 2." << std::endl;
 	FillLineup(lineup_num, p2_lineup);
 	
-	// do while loop to contain
-		// run fighter match-up function
-	//
+	// run fighter match-up function
+	StartTourney(p1_lineup, p2_lineup, losers);
+
+	std::cout << "The tournament is over!" std::endl;
 	
 	return 0;
 }
@@ -146,6 +158,24 @@ int Creature::getHealth()
 	return str_points;
 } 
 
+/**************************************************************************************************
+ *						setWins
+ *
+ **************************************************************************************************/
+void Creature::setWins()
+{
+	wins++;
+} 
+ 
+/**************************************************************************************************
+ *						getWins
+ *
+ **************************************************************************************************/ 
+int Creature::getWins()
+{
+	return wins;
+}
+
 // using polymorphism to construct barbarian
 /**************************************************************************************************
  *						Barbarian
@@ -153,12 +183,14 @@ int Creature::getHealth()
  **************************************************************************************************/
 Barbarian::Barbarian()
  {
+	name = "Barbarian";
 	str_points = 12;
 	armor = 0;
 	atk_die_num = 2;
 	atk_die_side = 6;
 	def_die_num = 2;
 	def_die_side = 6;
+	wins = 0;
  }
  
  // using polymorphism to construct ReptilePeople
@@ -168,12 +200,14 @@ Barbarian::Barbarian()
  **************************************************************************************************/
 ReptilePeople::ReptilePeople()
  {
+	name = "Reptile People";
 	str_points = 18;
 	armor = 7;
 	atk_die_num = 3;
 	atk_die_side = 6;
 	def_die_num = 1;
 	def_die_side = 6;
+	wins = 0;
  }
  
  // using polymorphism to construct BlueMen
@@ -183,12 +217,14 @@ ReptilePeople::ReptilePeople()
  **************************************************************************************************/
 BlueMen::BlueMen()
  {
+	name = "Blue Men";
 	str_points = 12;
 	armor = 3;
 	atk_die_num = 2;
 	atk_die_side = 10;
 	def_die_num = 3;
 	def_die_side = 6;
+	wins = 0;
  }
  
  // using polymorphism to construct TheShadow
@@ -198,12 +234,14 @@ BlueMen::BlueMen()
  **************************************************************************************************/
 TheShadow::TheShadow()
  {
+	name = "The Shadow";
 	str_points = 12;
 	armor = 0;
 	atk_die_num = 2;
 	atk_die_side = 10;
 	def_die_num = 1;
 	def_die_side = 6;
+	wins = 0;
  }
  
  /**************************************************************************************************
@@ -246,12 +284,14 @@ int TheShadow::defense(int opp_atk)
  **************************************************************************************************/
 Goblin::Goblin()
  {
+	name = "Goblin";
 	str_points = 8;
 	armor = 3;
 	atk_die_num = 2;
 	atk_die_side = 6;
 	def_die_num = 1;
 	def_die_side = 6;
+	wins = 0;
 	achilles = false;
  }
  
@@ -365,3 +405,56 @@ void FillLineup(int lineup_num, std::queue<Creature *> & lineup)
 		}
 	}
 }
+
+/**************************************************************************************************
+ *						StartTourney
+ *
+ **************************************************************************************************/
+void StartTourney(std::queue<Creature *> & p1_lineup, std::queue<Creature *> & p2_lineup, std::stack<Creature *> & losers)
+{
+	int turn = 2;
+	int health;
+	
+	while (p1_lineup.size() != 0 && p2_lineup.size() != 0)
+	{
+		if (turn == 1)
+		{
+			health = p2_lineup.front()->defense(p1_lineup.front()->attack());
+			turn = 2;
+			
+			if (health < 1)
+			{
+				std::cout << "Player 2s fighter the " << p2_lineup.front()->getName() << " is DEAD" << std::endl;
+				
+				// add win to winning fighter
+				p1_lineup.front()->setWins();
+				
+				// add loser to loser queue
+				losers.push(p2_lineup.front());
+				
+				// take loser out of player2 lineup
+				p2_lineup.pop();
+			}			
+		}
+	
+		else
+		{
+			health = p1_lineup.front()->defense(p2_lineup.front()->attack());
+			turn = 1;
+			
+			if (health < 1)
+			{
+				std::cout << "Player 1s fighter the " << p1_lineup.front()->getName() << " is DEAD" << std::endl;
+				
+				// add win to winning fighter
+				p2_lineup.front()->setWins();
+				
+				// add loser to loser queue
+				losers.push(p1_lineup.front());
+				
+				// take loser out of player2 lineup
+				p1_lineup.pop();
+			}
+		}
+	}
+} 	 
