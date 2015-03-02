@@ -12,21 +12,39 @@
 
 struct Room
 {
-	std::string name;
+	Room *north;
+	Room *east;
+	Room *south;
+	Room *west;
 	
-	Room *north = NULL;
-	Room *east = NULL;
-	Room *south = NULL;
-	Room *west = NULL;
-}
+	Room()
+	{
+		north = NULL;
+		east = NULL;
+		south = NULL;
+		west = NULL;
+	}	
+};
 
 int main()
 {
+	// create the rooms for the maze
 	Room *roomOne = new Room();
 	Room *roomTwo = new Room();
+	Room *roomThree = new Room();
+	Room *roomFour = new Room();
+	Room *roomFive = new Room();
 	
 	roomOne->east = roomTwo;
+	roomTwo->north = roomThree;
+	roomThree->north = roomFour;
+	roomFour->east = roomFive;
 
+	Room *player = roomOne;
+
+	player = roomOne->north;
+	
 	return 0;
 }
+
 
