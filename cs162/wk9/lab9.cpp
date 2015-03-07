@@ -2,7 +2,7 @@
 *Author:                 James Spolsdoff
 *Date Created:           3/7/15
 *Last Modification Date: 3/7/15
-*Filename:               main.cpp
+*Filename:               lab9.cpp
 *
 *Overview
 *
@@ -13,6 +13,7 @@
 int main()
 {
 	Stack testStack;
+	Queue testQueue;
 	int max_num;
 	int num;
 	
@@ -38,6 +39,20 @@ int main()
 	}
 	
 	// fill and display queue
+	for (int i = 0; i <max_num; i++)
+	{
+		std::cout << "Please enter number " << (i + 1) << " for your queue: ";
+		std::cin >> num;
+		
+		std::cout << "Adding to the back... " << num << std:endl;
+		testQueue.addBack(num);
+	}
+	
+	while (!testQueue.isEmpty())
+	{
+		std::cout << "Removing from front... " << testQueue.getFront() << std::endl;
+		testQueue.removeFront();
+	}
 	
 	return 0;
 }
