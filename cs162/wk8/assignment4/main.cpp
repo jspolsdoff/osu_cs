@@ -37,7 +37,7 @@ class Creature
 	void setWins();
 	int getWins();
 	std::string getPName();
-	int getTeam();
+	int getTeam();s
 };
 
 class Barbarian : public Creature
