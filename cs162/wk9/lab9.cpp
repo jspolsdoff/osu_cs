@@ -22,7 +22,7 @@ int main()
 	std::cin >> max_num;
 	
 	// fill and display stack
-	for (int i = 0; i < (max_num - 1); i++)
+	for (int i = 0; i < max_num; i++)
 	{
 		std::cout << "Please enter number " << (i + 1) << " for your stack: ";
 		std::cin >> num;
@@ -31,9 +31,10 @@ int main()
 		testStack.push(num);
 	}
 	
-	while (!isEmpty())
+	while (!testStack.isEmpty())
 	{
-		std::cout << "Popping... " << std::endl;
+		testStack.pop(num);
+		std::cout << "Popping... " << num << std::endl;
 	}
 	
 	// fill and display queue

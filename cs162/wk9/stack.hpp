@@ -19,7 +19,7 @@ class Stack
 		StackNode *top;
 		
 	public:
-		Stack() { top = NULL }
+		Stack() { top = NULL; }
 		void push(int);
 		void pop(int &);
 		bool isEmpty() const;
