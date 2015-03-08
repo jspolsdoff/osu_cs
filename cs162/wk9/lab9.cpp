@@ -9,6 +9,7 @@
 ***************************************************************************************************/
 #include <iostream>
 #include "stack.hpp"
+#include "queue.hpp"
 
 int main()
 {
@@ -44,7 +45,7 @@ int main()
 		std::cout << "Please enter number " << (i + 1) << " for your queue: ";
 		std::cin >> num;
 		
-		std::cout << "Adding to the back... " << num << std:endl;
+		std::cout << "Adding to the back... " << num << std::endl;
 		testQueue.addBack(num);
 	}
 	

@@ -17,7 +17,7 @@ Queue::Queue()
 ***************************************************************************************************/
 Queue::~Queue()
 {
-	clear();
+	// clear();
 }
 
 /**************************************************************************************************
@@ -45,7 +45,7 @@ void Queue::addBack(int num)
 ***************************************************************************************************/
 int Queue::getFront()
 {
-	int front;
+	int value;
 	
 	Queue *temp;
 	if (isEmpty())
@@ -56,8 +56,8 @@ int Queue::getFront()
 	
 	else
 	{
-		front = front->value;
-		return front;
+		value = front->value;
+		return value;
 	}
 }
 
@@ -75,7 +75,7 @@ void Queue::removeFront()
 	
 	else
 	{
-		front->next;
+		front = front->next;
 	}
 }
 

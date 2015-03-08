@@ -3,7 +3,7 @@ DEBUG = -g
 CXXFLAGS = -std=c++0x $(DEBUG)
 PROGS = lab9
 OUTPUTS = 
-OBJS = stack.o lab9.o
+OBJS = queue.o stack.o lab9.o
 
 all: $(PROGS)
 

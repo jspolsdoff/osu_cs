@@ -28,7 +28,7 @@ class Queue
 		void addBack(int num);
 		int getFront();
 		void removeFront();
-		isEmpty();
-}
+		bool isEmpty() const;
+};
 
 #endif
