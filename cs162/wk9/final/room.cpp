@@ -7,11 +7,11 @@
 ***************************************************************************************************/
 Room::Room()
 {    
-	Room newRoom;
-    newRoom.north = NULL;
-    newRoom.east = NULL;
-    newRoom.south = NULL;
-    newRoom.west = NULL;
-    newRoom.wasVisited = false;
-    newRoom.isExit = false;
+	north = NULL;
+	east = NULL;
+	south = NULL;
+	west = NULL;
+	description = " ";
+	wasVisited = false;
+	isExit = false;
 }

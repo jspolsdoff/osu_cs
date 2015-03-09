@@ -10,24 +10,26 @@
 ***************************************************************************************************/
 Submarine::Submarine()
 {
-	ifstream roomDescription("rooms.txt");
+	std::ifstream roomDescription("rooms.txt");
 	std::string line;
 	std::string description;
-	
+		
 	if (!roomDescription)
     {
-        std::cerr << "Error! Unable to open room descriptions file!" << endl;
+        std::cerr << "Error! Unable to open room descriptions file!" << std::endl;
         exit(1);
     }
 	
 	try
 	{
 		// attempt to read each of the rooms from the file
-		for (int i = 0; i < 10; room++)
+		for (int i = 0; i < 10; i++)
 		{
-			getline(roomDescriptions, line);
+			std::cout << "start of loop" << std::endl;
+			getline(roomDescription, line);
+			std::cout << line << std::endl;
 			// make sure each room starts off correctly
-			if (line.find("<ROOM") == string::npos)
+			if (line.find("<ROOM") == std::string::npos)
 				throw "Error!"; // if not throw an exception
 
 			// load the description from the file
@@ -39,13 +41,13 @@ Submarine::Submarine()
     
 	catch (const char *e) // catch an exception that we throw
     {
-        std::cerr << e << endl;
+        std::cerr << e << std::endl;
         exit(1);
     }
     
 	catch (...)// catch any other exception that gets thrown
     {
-        std::cerr << "Error reading rooms from file" << endl;
+        std::cerr << "Error reading rooms from file" << std::endl;
         exit(1);
     }
 	

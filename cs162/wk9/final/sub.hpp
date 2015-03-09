@@ -1,15 +1,15 @@
 #ifndef SUB_HPP
 #define SUB_HPP
+#include "room.hpp"
 
 class Submarine
 {
 	private:
-	const int NUM_ROOMS = 10;
-	Room rooms[NUM_ROOMS];
+	Room rooms[10];
 	
 	public:
 	Submarine();
 	
-}
+};
 
 #endif

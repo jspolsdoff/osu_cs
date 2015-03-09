@@ -15,7 +15,7 @@ class Room
     bool isExit;
 	
 	public:
-	virtual Room();
+	Room();
 	
 };
 

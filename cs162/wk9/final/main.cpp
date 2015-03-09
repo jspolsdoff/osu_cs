@@ -15,5 +15,7 @@ int main()
 {
 	Submarine yellow_sub;
 
+	std::cout << "The yellow submarine was created" << std::endl;
+
 	return 0;
 }
