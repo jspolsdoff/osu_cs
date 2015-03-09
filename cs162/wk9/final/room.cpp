@@ -15,3 +15,18 @@ Room::Room()
 	wasVisited = false;
 	isExit = false;
 }
+
+/**************************************************************************************************
+*						Room
+*
+***************************************************************************************************/
+Room::Room(std::script)
+{
+	north = NULL;
+	east = NULL;
+	south = NULL;
+	west = NULL;
+	description = script;
+	wasVisited = false;
+	isExit = false;
+}

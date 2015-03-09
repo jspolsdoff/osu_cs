@@ -9,6 +9,7 @@ class Submarine
 	
 	public:
 	Submarine();
+	std::string getRoomDescription(std::ifstream &input);
 	
 };
 

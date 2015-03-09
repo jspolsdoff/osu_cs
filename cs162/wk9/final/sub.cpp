@@ -33,9 +33,9 @@ Submarine::Submarine()
 				throw "Error!"; // if not throw an exception
 
 			// load the description from the file
-			// description = loadRoomDescription(roomDescription);
+			description = getRoomDescription(roomDescription);
 			// create a room with the description
-			// rooms[i] = createRoom(description);
+			rooms[i] = Room room(description);
 		}
     }
     
@@ -51,4 +51,24 @@ Submarine::Submarine()
         exit(1);
     }
 	
+}
+
+/**************************************************************************************************
+*						getRoomDescription
+*
+***************************************************************************************************/
+std::string getRoomDescription(std::ifstream &input)
+{
+	std::string line; 
+	std::string description;
+	
+    getline(input, line);
+    // process each line until we get to the closing tag
+    while (line.find("</ROOM") == std::string::npos)
+    {
+        description += line + "\n";
+        getline(input, line);
+    }
+
+    return description;
 }
