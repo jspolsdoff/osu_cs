@@ -1,0 +1,30 @@
+<ROOM 1>
+This is Room 1
+</ROOM 1>
+<ROOM 2>
+This is Room 2
+</ROOM 2>
+<ROOM 3>
+This is Room 3
+</ROOM 3>
+<ROOM 4>
+This is Room 4
+</ROOM 4>
+<ROOM 5>
+This is Room 5
+</ROOM 5>
+<ROOM 6>
+This is Room 6
+</ROOM 6>
+<ROOM 7>
+This is Room 7
+</ROOM 7>
+<ROOM 8>
+This is Room 8
+</ROOM 8>
+<ROOM 9>
+This is Room 9
+</ROOM 9>
+<ROOM 10>
+This is Room 10
+</ROOM 10>
