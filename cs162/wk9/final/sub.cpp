@@ -31,9 +31,9 @@ Submarine::Submarine()
 				throw "Error!"; // if not throw an exception
 
 			// load the description from the file
-			description = loadRoomDescription(roomDescription);
+			// description = loadRoomDescription(roomDescription);
 			// create a room with the description
-			rooms[i] = createRoom(description);
+			// rooms[i] = createRoom(description);
 		}
     }
     
