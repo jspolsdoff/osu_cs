@@ -25,7 +25,6 @@ Submarine::Submarine()
 		// attempt to read each of the rooms from the file
 		for (int i = 0; i < 10; i++)
 		{
-			std::cout << "start of loop" << std::endl;
 			getline(roomDescription, line);
 			std::cout << line << std::endl;
 			// make sure each room starts off correctly
@@ -34,8 +33,11 @@ Submarine::Submarine()
 
 			// load the description from the file
 			description = getRoomDescription(roomDescription);
+			std::cout << description << std::endl;
+
 			// create a room with the description
-			rooms[i] = Room room(description);
+			Room test(description);
+			rooms[i] = test;
 		}
     }
     
@@ -57,7 +59,7 @@ Submarine::Submarine()
 *						getRoomDescription
 *
 ***************************************************************************************************/
-std::string getRoomDescription(std::ifstream &input)
+std::string Submarine::getRoomDescription(std::ifstream &input)
 {
 	std::string line; 
 	std::string description;

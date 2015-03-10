@@ -20,7 +20,7 @@ Room::Room()
 *						Room
 *
 ***************************************************************************************************/
-Room::Room(std::script)
+Room::Room(std::string script)
 {
 	north = NULL;
 	east = NULL;
