@@ -2,6 +2,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <string>
+#include <vector>
 #include "sub.hpp"
 
 /**************************************************************************************************
@@ -36,8 +37,8 @@ Submarine::Submarine()
 			std::cout << description << std::endl;
 
 			// create a room with the description
-			Room test(description);
-			rooms[i] = test;
+			Room newRoom* = new Room(description);
+			rooms.push_back(newRoom);
 		}
     }
     
