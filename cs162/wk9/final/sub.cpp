@@ -37,8 +37,8 @@ Submarine::Submarine()
 			std::cout << description << std::endl;
 
 			// create a room with the description
-			Room newRoom* = new Room(description);
-			rooms.push_back(newRoom);
+			Room *newRoom = new Room(description);
+			rooms[i] = newRoom;
 		}
     }
     

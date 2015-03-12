@@ -21,7 +21,7 @@ int main()
 	
 	for (int i = 0; i < 10; i++)
 	{
-		std::cout << yellow_sub.room[i]->getDescription() << std::endl;
+		std::cout << yellow_sub.rooms[i]->getDescription() << std::endl;
 	}
 
 	return 0;

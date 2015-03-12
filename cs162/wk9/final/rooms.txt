@@ -1,5 +1,5 @@
 <ROOM 1>
-This is Room 1
+This is Room 1. This is an expanded room test. You wake up in your room.  
 </ROOM 1>
 <ROOM 2>
 This is Room 2

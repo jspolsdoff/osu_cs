@@ -5,12 +5,12 @@
 class Submarine
 {
 	private:
-	std::vector<Room *> rooms;
+	Room * rooms[10];
 	
 	public:
 	Submarine();
 	std::string getRoomDescription(std::ifstream &);
-	
+	// Room* rooms[10];
 };
 
 #endif
