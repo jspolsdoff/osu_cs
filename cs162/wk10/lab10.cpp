@@ -26,12 +26,29 @@
 
 using namespace std::chrono;
 
-using namespace std;
+//using namespace std;
+
+long rfactorial(int n)
+{
+	if (n == 1)
+		return 1;
+	else
+		return n * rfactorial(n-1);
+}
+
+long factorialHelper(int n, int result)
+{
+	if (n == 1)
+		return result;
+	else
+		return factorialHelper(n-1,n*result);
+}
+
 
 void Usage()
 {
-	cout<<"Correct Usage:"<<endl;
-	cout<<"./Fibonacci [n]"<<endl;
+	std::cout<<"Correct Usage:"<<std::endl;
+	std::cout<<"./Fibonacci [n]"<<std::endl;
 }
 
 int main(int argc, char** args) 
@@ -41,15 +58,15 @@ int main(int argc, char** args)
 		const char* input; //Note: char by default initializes to '\0'
 		if(args[1]!=0)
 		{	
-			cout<<"1st passed arguement: '"<<args[1]<<"'"<<endl;
+			std::cout<<"1st passed arguement: '"<<args[1]<<"'"<<std::endl;
 			input= args[1]; 
 		}
 		
 		int n= atoi(input);
 		
-		cout<<"Finding '"<<n<<"'th "<<"fibonacci number...."<<endl;
+		std::cout<<"Finding '"<<n<<"'th "<<"fibonacci number...."<<std::endl;
 		
-		cout<<"Calling Recursive Fibonacci implementation"<<endl;
+		std::cout<<"Calling Recursive Fibonacci implementation"<<std::endl;
 		
 		// start timer
 		high_resolution_clock::time_point t1 = high_resolution_clock::now();
@@ -59,36 +76,44 @@ int main(int argc, char** args)
 		// stop timer and calculate result
 		high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
-		auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
-		
+		duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
+
 		fr.PrintFibonacci();
 		
-		cout << "The time to run function is : " << duration << endl;
+		std::cout << "The time to run function is : " << time_span.count() << std::endl;
 		
-		cout<<"Calling Non-Recursive Fibonacci implementation"<<endl;
+		std::cout<<"Calling Non-Recursive Fibonacci implementation"<<std::endl;
 		
 		// start timer
-		high_resolution_clock::time_point t1 = high_resolution_clock::now();
+		t1 = high_resolution_clock::now();
 		
 		FibonacciNR fnr(n);
 		
 		// stop timer and calculate result
-		high_resolution_clock::time_point t2 = high_resolution_clock::now();
+		t2 = high_resolution_clock::now();
 
-		auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
+		time_span = duration_cast<duration<double>>(t2 - t1);
 		
 		fnr.PrintFibonacci();
 		
-		cout << "The time to run function is : " << duration << endl;
+		std::cout << "The time to run function is : " << time_span.count() << std::endl;
 		
-		cout << "Done!!!!" << endl; 
-		
+		std::cout << "Done!!!!" << std::endl; 
+	
+
+		/*if (n > 1)
+		{
+			long factorial = rfactorial(n);
+
+			std::cout << factorial << std::endl;
+		}*/	
+
 		return 0;
 	}
 	
 	catch(...)
 	{
-		cout<<"Oops an error occured! Please check usage"<<endl;
+		std::cout<<"Oops an error occured! Please check usage"<<std::endl;
 		Usage();
 		return 1;
 	}
