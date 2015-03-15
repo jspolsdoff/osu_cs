@@ -5,7 +5,7 @@
 class Submarine
 {
 	private:
-	Room rooms[10];
+	std::vector<Room *> rooms;
 	
 	public:
 	Submarine();
