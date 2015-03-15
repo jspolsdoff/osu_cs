@@ -5,7 +5,7 @@
 class Submarine
 {
 	private:
-	Room *rooms[10];
+	Room *rooms[9];
 	enum Direction { NORTH, EAST, SOUTH, WEST };
 	
 	public:

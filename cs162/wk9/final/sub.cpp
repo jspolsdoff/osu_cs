@@ -41,6 +41,9 @@ Submarine::Submarine()
 			rooms[i] = newRoom;
 		}
     }
+	
+	// configure submarine room layout
+	configRooms();
     
 	catch (const char *e) // catch an exception that we throw
     {
@@ -54,6 +57,8 @@ Submarine::Submarine()
         exit(1);
     }
 	
+	// close room description file
+	roomDescription.close();
 }
 
 /**************************************************************************************************
@@ -122,21 +127,30 @@ void configRooms()
 	makeRoomLink(rooms[3], rooms[2], WEST);
 	
 	// room 4
+	makeRoomLink(rooms[3], rooms[5], EAST);
+	makeRoomLink(rooms[5], rooms[3], WEST);
+	
+	// room 5
 	makeRoomLink(rooms[3], rooms[4], SOUTH);
 	makeRoomLink(rooms[4], rooms[3], NORTH);
 	
-	// room 5
-	
 	// room 6
-	
-	// room 6
+	makeRoomLink(rooms[5], rooms[6], EAST);
+	makeRoomLink(rooms[6], rooms[5], WEST);
 	
 	// room 7
+	makeRoomLink(rooms[6], rooms[8], EAST);
+	makeRoomLink(rooms[8], rooms[6], WEST);
 	
 	// room 8
+	makeRoomLink(rooms[7], rooms[6], SOUTH);
+	makeRoomLink(rooms[6], rooms[7], NORTH);
 	
 	// room 9
+	makeRoomLink(rooms[8], rooms[9], EAST);
+	makeRoomLink(rooms[9], rooms[8], WEST);
 	
 	// room 10
+	
 
 }
