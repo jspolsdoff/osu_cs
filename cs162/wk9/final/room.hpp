@@ -17,6 +17,7 @@ class Room
 	public:
 	Room();
 	Room(std::string script);
+	std::string getDescription();
 };
 
 // basic derived room

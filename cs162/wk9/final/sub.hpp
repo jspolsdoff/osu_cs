@@ -5,11 +5,14 @@
 class Submarine
 {
 	private:
-	Room rooms[10];
+	Room *rooms[10];
+	enum Direction { NORTH, EAST, SOUTH, WEST };
 	
 	public:
 	Submarine();
 	std::string getRoomDescription(std::ifstream &);
+	void makeRoomLink(Room *room1, Room *room2, Direction dir);
+	void configRooms();
 	
 };
 
