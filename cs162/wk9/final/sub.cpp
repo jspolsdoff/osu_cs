@@ -75,3 +75,68 @@ std::string Submarine::getRoomDescription(std::ifstream &input)
 
     return description;
 }
+
+/**************************************************************************************************
+*						makeRoomLink
+*
+***************************************************************************************************/
+void makeRoomLink(Room *room1, Room *room2, Direction dir)
+{
+    switch (dir)
+    {
+    case NORTH:
+        room1->north = room2;
+        room2->south = room1;
+        break;
+    case EAST:
+        room1->east = room2;
+        room2->west = room1;
+        break;
+    case SOUTH:
+        room1->south = room2;
+        room2->north = room1;
+        break;
+    case WEST:
+        room1->west = room2;
+        room2->east = room1;
+        break;
+    }
+}
+
+/**************************************************************************************************
+*						configRooms
+*
+***************************************************************************************************/
+void configRooms()
+{
+	// room 1
+	makeRoomLink(rooms[0], rooms[1], SOUTH);
+    makeRoomLink(rooms[1], rooms[0], NORTH);
+	
+	// room 2
+	makeRoomLink(rooms[1], rooms[2], EAST);
+	makeRoomLink(rooms[2], rooms[1], WEST);
+	
+	// room 3
+	makeRoomLink(rooms[2], rooms[3], EAST);
+	makeRoomLink(rooms[3], rooms[2], WEST);
+	
+	// room 4
+	makeRoomLink(rooms[3], rooms[4], SOUTH);
+	makeRoomLink(rooms[4], rooms[3], NORTH);
+	
+	// room 5
+	
+	// room 6
+	
+	// room 6
+	
+	// room 7
+	
+	// room 8
+	
+	// room 9
+	
+	// room 10
+
+}
