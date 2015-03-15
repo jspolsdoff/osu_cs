@@ -5,7 +5,7 @@
 
 class Room
 {
-	protected:
+	public:
 	Room *north;
     Room *east;
     Room *south;
@@ -14,10 +14,12 @@ class Room
     bool wasVisited;
     bool isExit;
 	
-	public:
+	
 	Room();
 	Room(std::string script);
 	std::string getDescription();
+	void setExit();
+	bool getIsExit();
 };
 
 // basic derived room
