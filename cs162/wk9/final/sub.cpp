@@ -14,6 +14,9 @@ Submarine::Submarine()
 	std::ifstream roomDescription("rooms.txt");
 	std::string line;
 	std::string description;
+
+	key_card = false;
+	pass_code = false;
 		
 	if (!roomDescription)
     {
@@ -38,6 +41,12 @@ Submarine::Submarine()
 			// create a room with the description
 			Room *newRoom = new Room(description);
 			rooms[i] = newRoom;
+		
+			if (i == 8)
+			{
+				Room *newRoom = new ActionRoom(description);
+				rooms[i] = newRoom;
+			}
 		}
     	
 		rooms[9]->setExit();
@@ -217,6 +226,11 @@ bool Submarine::checkDirectionValid(int move)
 			std::cout << "Not a valid direction!" << std::endl;
 			return false;
 		}
+		if (current_room == getRoom(6) && !(key_card))
+		{
+			std::cout << "This door is locked. It looks like you need some kind of keycard." << std::endl;
+			return false;
+		}
 		else
 			return true;
 	}
@@ -226,7 +240,12 @@ bool Submarine::checkDirectionValid(int move)
 		{
 			std::cout << "Not a valid direction!" << std::endl;
 			return false;
-		}	
+		}
+		if (current_room == getRoom(8) && !(current_room->getCode()))
+		{
+			std::cout << "You didn't enter the right code!" << std::endl;
+			return false; 
+		}  	
 		else
 			return true;
 	}
@@ -276,4 +295,13 @@ Room* Submarine::move(int move_choice)
   	{
 		return current_room->west;
 	}
-}    
+}
+
+/**************************************************************************************************
+*
+*
+***************************************************************************************************/
+Room* Submarine::getRoom(int i)
+{
+	return rooms[i];
+}      

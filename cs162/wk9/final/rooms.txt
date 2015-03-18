@@ -1,30 +1,59 @@
 <ROOM 1>
-This is Room 1. This is an expanded room test. You wake up in your room.  
+You wake up in your cabin to the blaring sound of a siren. This can't be good. 
+This only happens when there is a really emergency. You quickly put on all your 
+gear. Time to head to your post. The door to the south leads to the ship's hallway.     
 </ROOM 1>
 <ROOM 2>
-This is Room 2
+As you stumble out of your room you realize that the situation is far worse
+than you initially thought. There should be crew members running to their
+posts however; the ship is completely empty. The hallway is lite only by the
+emergency lights.  
 </ROOM 2>
 <ROOM 3>
-This is Room 3
+As you move further down the hallway you are startled to hear..."SELF DESTRUCTION 
+SEQUENCE INITIATED. THE SHIP WILL SELF DESTRUCT IN 10 MINUTES." This situation 
+just went from bad to worse. You've got to get off this ship... and fast. You 
+need to get to the escape pods. It won't be a walk in the park though. You need 
+to find the access code to the escape pod's door.
+
+If your memory serves you right it should be in the captains cabin. He's
+probably got his cabin locked so you'll have to track down his key card.  
 </ROOM 3>
 <ROOM 4>
-This is Room 4
+You keep moving down the hallway keeping your hand close to the wall to guide
+you through the darkness. You now have a choice. You can continue down the
+hallway or explore the messhall. 
 </ROOM 4>
 <ROOM 5>
-This is Room 5
+There looks like there was a large struggle in the messhall. Tables and cars
+have been overturn and blood stains the floor and walls. You walk into the
+kitchen and find the captains body. Looks like he didn't go without a fight.
+You look in his jacket and find his keycard. 
 </ROOM 5>
 <ROOM 6>
-This is Room 6
+You keep moving down the hallway. Looks like there's more light ahead. You
+remember that both the captains cabin and escape pod should be this way.
 </ROOM 6>
 <ROOM 7>
-This is Room 7
+You reach the end of the hallway. To your north is the captains cabin. The
+door is closed. You will need some type of key card to open it. To the east is
+the escape pod but you will need a keycard to open it.
 </ROOM 7>
 <ROOM 8>
-This is Room 8
+After you open the door you quickly rush into the captains cabin and start to
+search for the code. After some time you find it written on a piece of paper 
+in the drawer in his desk. 
+
+It reads '1234'. Wow! The captain was really creative with his passwords.
 </ROOM 8>
 <ROOM 9>
-This is Room 9
+You're almost in the clear. The escape pods are in front of you. There is a
+keypad to enter a passcode.
 </ROOM 9>
 <ROOM 10>
-This is Room 10
+You open up the pod and jump in. You punch in the coordinates and are on your
+way to from the starship.
+
+As your escape pod travels through space the starship explodes to magnificent
+silence behind you.
 </ROOM 10>

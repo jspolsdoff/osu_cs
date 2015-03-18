@@ -5,11 +5,13 @@
 
 class Submarine
 {
-	private:
+	// private:
+	public: 
 	Room *rooms[9];
-	User *test;	
-
-	public:
+	bool key_card;
+	bool pass_code;
+		
+	// public:
 	Submarine();
 	Room *current_room;
 	std::string getRoomDescription(std::ifstream &);
@@ -19,6 +21,7 @@ class Submarine
 	int getMoveDirection();
 	bool checkDirectionValid(int);
 	Room* move(int);
+	Room* getRoom(int i);
 };
 
 #endif
