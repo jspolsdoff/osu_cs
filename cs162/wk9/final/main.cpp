@@ -8,6 +8,7 @@
 *
 ***************************************************************************************************/
 #include <iostream>
+#include "user.hpp"
 #include "room.hpp"
 #include "sub.hpp"
 

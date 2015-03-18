@@ -1,15 +1,15 @@
 #ifndef SUB_HPP
 #define SUB_HPP
 #include "room.hpp"
+#include "user.hpp"
 
 class Submarine
 {
-	// private:
-	public: 
+	private:
 	Room *rooms[9];
-	// Room *current_room;	
+	User *test;	
 
-	// public:
+	public:
 	Submarine();
 	Room *current_room;
 	std::string getRoomDescription(std::ifstream &);

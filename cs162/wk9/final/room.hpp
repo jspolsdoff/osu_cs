@@ -23,7 +23,7 @@ class Room
 };
 
 // basic derived room
-class BasicRoom : public Room
+class LockedRoom : public Room
 {
 	private:
 	
