@@ -100,6 +100,21 @@ void loadList(DynArr *heap, FILE *filePtr)
 void printList(DynArr *heap)
 {
     /* FIXME: Write this */
+	DynArr *temp = createDynArr(sizeDynArr(heap));
+	Task* t;
+	assert(sizeDynArr(heap) > 0);
+
+	copyDynArr(heap, temp);
+
+	while (sizeDynArr(temp) > 0) {
+		t = getMinHeap(temp);
+
+		printf("%d: %s\n", t->priority, t->description);
+
+		removeMinHeap(temp);
+	}
+
+	deleteDynArr(temp);
 }
 
 /*  Delete the list
