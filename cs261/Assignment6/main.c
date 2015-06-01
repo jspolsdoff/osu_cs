@@ -33,7 +33,7 @@ int main (int argc, const char * argv[]) {
     if(argc == 2)
         filename = argv[1];
     else
-        filename = "C:\\Users\\Jim\\Google Drive\\cs\\cs 261\\Projects\\Projects\\Assignment6\\input1.txt"; /*specify your input text file here*/
+        filename = "input1.txt"; /*specify your input text file here*/
     
     printf("opening file: %s\n", filename);
 
@@ -43,45 +43,42 @@ int main (int argc, const char * argv[]) {
 		perror("Error: ");
 		return(-1);
 	}
-    
+	
 	timer = clock();
 	
 	hashTable = createMap(tableSize);	   
 	
     /*... concordance code goes here ...*/
 	char *word;
-	int contains;
+	int test_count = 0;
+	int test_size = 0;
 	int *value;
 
-	word = getWord(fileptr);
-
 	while (!feof(fileptr)) {
-		printf("In da loop\n");
+		// printf("In da loop\n");
 
-		contains = containsKey(hashTable, word);
+		test_count++;
+		test_size = size(hashTable);
 
-		// the word doesn't exist in the table
-	
-		if (contains == 0) {
-			printf("Let's add a new key!\n");
+		// get the word
+		word = getWord(fileptr);
 
+		// check to see if it in the map
+		if (containsKey(hashTable, word)) {
+			// get value
+			value = atMap(hashTable, word);
+			// increment value
+			*(int *)value = *(int *)value + 1;
+			// add new value to table
+		}
+
+		else {
+			// just add new work to table
 			insertMap(hashTable, word, 1);
 		}
-		else {
-			printf("Let's add to an old key!\n");
-
-			value = atMap(hashTable, word);
-
-			*value += 1;
-
-			insertMap(hashTable, word, *value);
-		}
-		
-		word = getWord(fileptr);
-		int test = hashTable->count;
-			printf("This is the count: %d\n", test);
 	}
 	/*... concordance code ends here ...*/
+	// printf("The test count is: %d\n", test_count);
 
 	printMap(hashTable);
 	timer = clock() - timer;

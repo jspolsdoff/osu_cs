@@ -57,23 +57,21 @@ void _freeMap (struct hashMap * ht)
 {  
 	/*write this*/	
 	struct hashLink *bucket;
-	// struct hashLink *temp;
+	struct hashLink *temp;
 
 	// go through all buckets
 	for (int i = 0; i < ht->tableSize; i++) {
 		bucket = ht->table[i];
 
 		// go through bucket and free memory
-		// while (bucket != NULL) {
+		while (bucket != NULL) {
 			// set up next bucket
-			// temp = bucket->next;
-			// free(bucket->key);
-			// free(bucket->value);
-			// free(bucket);
-			// bucket = temp;
-		// }
+			temp = bucket->next;
+			free(bucket);
+			bucket = temp;
+		}
 	}
-	
+	free(ht->table);
 }
 
 /* Deallocate buckets and the hash map.*/
@@ -91,22 +89,24 @@ Resizes the hash table to be the size newTableSize
 void _setTableSize(struct hashMap * ht, int newTableSize)
 {
 	/*write this*/	
-	struct hashMap *biggerTable = createMap(newTableSize);
-	struct hashLink *temp;
-	struct hashLink *current;
+	struct hashLink **oldTable = ht->table;
+	int oldSize = ht->tableSize;
 
-	for (int i = 0; i < ht->tableSize; i++) {
-		current = ht->table[i];
+	_initMap(ht, newTableSize);
 
-		while (current) {
-			temp = current->next;
-			insertMap(biggerTable, current->key, current->value);
+	for (int i = 0; i < oldSize; i++) {
+		struct hashLink *current = oldTable[i];
+
+		while (current != NULL) {
+			struct hashLink *temp = current->next;
+			insertMap(ht, current->key, current->value);
 			free(current);
 			current = temp;
 		}
 	}
-	_freeMap(ht);
-	ht = biggerTable;
+	// free up memory from the old table
+	free(oldTable);
+	printf("The number of buckets in the bigger table: %d\n", ht->tableSize);
 }
 
 /*
@@ -124,6 +124,8 @@ void _setTableSize(struct hashMap * ht, int newTableSize)
 void insertMap (struct hashMap * ht, KeyType k, ValueType v)
 {  
 	/*write this*/	
+	
+	/* insertMap Version 1
 	int hashIndex;
 
 	if (HASHING_FUNCTION == 1)
@@ -172,6 +174,42 @@ void insertMap (struct hashMap * ht, KeyType k, ValueType v)
 	// check to see if the table needs to be resized
 	if (tableLoad(ht) >= LOAD_FACTOR_THRESHOLD)
 		_setTableSize(ht, 2 * ht->tableSize);
+	*/ 
+
+	int hashIndex;
+
+	if (HASHING_FUNCTION == 1)
+		hashIndex = stringHash1(k) % ht->tableSize;
+	if (HASHING_FUNCTION == 2)
+		hashIndex = stringHash2(k) % ht->tableSize;
+
+	if (containsKey(ht, k)) {
+		struct hashLink *hashItr = ht->table[hashIndex];
+
+		while (hashItr != NULL) {
+			if (strcmp(hashItr->key, k) == 0) {
+				hashItr->value = v;
+			}
+		}
+	}
+
+	else {
+		// create link
+		struct hashLink *newLink = malloc(sizeof(struct hashLink));
+		newLink->next = ht->table[hashIndex];
+		newLink->key = k;
+		newLink->value = v;
+
+		// add to table
+		ht->table[hashIndex] = newLink;
+		ht->count++;
+
+		// check load
+		if (tableLoad(ht) >= LOAD_FACTOR_THRESHOLD)
+			_setTableSize(ht, (ht->tableSize * 2));
+	}
+
+	return;
 }
 
 /*
@@ -194,6 +232,7 @@ ValueType* atMap (struct hashMap * ht, KeyType k)
 		if (HASHING_FUNCTION == 2)
 			hashIndex = stringHash2(k) % ht->tableSize;
 
+		
 		hashItr = ht->table[hashIndex];
 
 		while (hashItr != NULL) {
@@ -227,14 +266,14 @@ int containsKey (struct hashMap * ht, KeyType k)
 		hashItr = ht->table[hashIndex];
 
 		while (hashItr != NULL) {
-			if (hashItr->key == k) {
+			if (strcmp(hashItr->key, k) == 0) {
 				return 1;
 			}
 			hashItr = hashItr->next;
 		}
 	}
-	else
-		return 0;
+
+	return 0;
 }
 
 /*
@@ -245,7 +284,33 @@ int containsKey (struct hashMap * ht, KeyType k)
  */
 void removeKey (struct hashMap * ht, KeyType k)
 {  
-	/*write this*/	
+	/*write this*/
+	/*
+	if (containsKey(ht, k) == 1) {
+		int hashIndex;
+		struct hashLink *hashItr;
+		struct hashLink *temp;
+
+		if (HASHING_FUNCTION == 1)
+			hashIndex = stringHash1(k) % ht->tableSize;
+		if (HASHING_FUNCTION == 2)
+			hashIndex = stringHash2(k) % ht->tableSize;
+			
+		hashItr = ht->table[hashIndex];
+
+			while (hashItr != NULL) {
+				if (strcmp(hashItr->next->key, k) == 0) {
+					temp = hashItr->next;
+					hashItr->next = hashItr->next->next;
+					free(temp);
+					return;
+				}
+				hashItr = hashItr->next;
+			}
+		
+	}
+	*/
+	return;
 }
 
 /*
